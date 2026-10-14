@@ -1,0 +1,17 @@
+# ── Credentials & local config ──────────────────────────────
+config/config.local.php
+config/db.local.php
+
+# ── Logs ─────────────────────────────────────────────────────
+logs/*.log
+
+# ── Uploaded files ────────────────────────────────────────────
+public/uploads/*
+!public/uploads/.gitkeep
+
+# ── OS / IDE ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
