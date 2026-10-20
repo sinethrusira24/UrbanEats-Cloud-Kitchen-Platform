@@ -144,19 +144,24 @@ CREATE TABLE IF NOT EXISTS inventory (
 
 -- 9. Stock movements
 CREATE TABLE IF NOT EXISTS stock_movements (
-    movement_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    dish_id     INT UNSIGNED    NOT NULL,
-    user_id     BIGINT UNSIGNED NULL,
-    change_qty  INT             NOT NULL COMMENT 'Positive = restock, negative = usage/wastage',
-    reason      VARCHAR(255)    NULL,
-    moved_at    TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    movement_id    BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    dish_id        INT UNSIGNED    NOT NULL,
+    user_id        BIGINT UNSIGNED NULL,
+    movement_type  ENUM('Initial', 'Restock', 'Wastage', 'Checkout_Deduction', 'Adjustment') NOT NULL DEFAULT 'Restock',
+    change_qty     INT             NOT NULL COMMENT 'Positive = restock, negative = usage/wastage',
+    previous_stock INT             NOT NULL DEFAULT 0,
+    updated_stock  INT             NOT NULL DEFAULT 0,
+    reason         VARCHAR(255)    NULL,
+    moved_at       TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_stock_movements_dish
         FOREIGN KEY (dish_id) REFERENCES dishes(dish_id)
         ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT fk_stock_movements_user
         FOREIGN KEY (user_id) REFERENCES users(user_id)
         ON UPDATE CASCADE ON DELETE SET NULL,
-    INDEX idx_stock_movements_dish (dish_id, moved_at)
+    INDEX idx_stock_movements_dish (dish_id, moved_at),
+    INDEX idx_stock_movements_type (movement_type, moved_at),
+    INDEX idx_stock_movements_user (user_id)
 ) ENGINE=InnoDB COMMENT='History of every stock change';
 
 
