@@ -314,29 +314,29 @@ INSERT IGNORE INTO categories (name, description, display_order, is_active) VALU
 ('Beverages',          'Juices, shakes, tea and coffee',                   8, 1);
 
 -- ── Dishes (seed for Component B) ─────────────────────────────────────────
-INSERT IGNORE INTO dishes (category_id, name, description, price, is_active) VALUES
-(1, 'Special Rice & Curry',     'White rice with 3 curries, papadum and salad',     450.00, 1),
-(1, 'Chicken Biriyani',         'Fragrant basmati rice with spiced chicken',         550.00, 1),
-(1, 'Vegetable Rice Plate',     'Rice with 3 vegetable curries',                     380.00, 1),
-(1, 'Prawn Biriyani',           'Basmati rice with whole prawns',                    700.00, 1),
-(2, 'Chicken Kottu',            'Shredded gothambu roti with chicken and vegetables',480.00, 1),
-(2, 'Egg Kottu',                'Classic egg kottu with onion and leek',             380.00, 1),
-(2, 'Cheese Kottu',             'Kottu loaded with melted cheese',                   520.00, 1),
-(3, 'Classic Beef Burger',      'Beef patty, lettuce, tomato, cheese',               550.00, 1),
-(3, 'Spicy Chicken Burger',     'Crispy fried chicken with chilli mayo',             520.00, 1),
-(3, 'Chicken Caesar Wrap',      'Grilled chicken, romaine, parmesan, caesar dressing',490.00, 1),
-(4, 'Spaghetti Bolognese',      'Slow-cooked beef ragu, parmesan',                   620.00, 1),
-(4, 'Pad Thai Noodles',         'Rice noodles, peanuts, spring onion, egg',          540.00, 1),
-(5, 'BBQ Chicken Platter',      'Half BBQ chicken with coleslaw and garlic bread',   850.00, 1),
-(5, 'Grilled Fish Plate',       'Fresh grilled seer fish with salad and rice',       750.00, 1),
-(6, 'Tomato Basil Soup',        'Classic tomato basil soup with garlic croutons',    290.00, 1),
-(6, 'Grilled Chicken Salad',    'Mixed greens, grilled chicken, vinaigrette',        420.00, 1),
-(7, 'Chocolate Lava Cake',      'Warm chocolate cake with vanilla ice cream',        350.00, 1),
-(7, 'Watalappan',               'Traditional Sri Lankan coconut custard pudding',    220.00, 1),
-(8, 'Fresh Mango Lassi',        'Blended mango with yoghurt',                        220.00, 1),
-(8, 'Iced Coffee',              'Cold brew with condensed milk',                     280.00, 1),
-(8, 'Fresh Lime Juice',         'Squeezed lime with a pinch of salt',                150.00, 1),
-(8, 'Strawberry Milkshake',     'Thick strawberry milkshake',                        320.00, 1);
+INSERT IGNORE INTO dishes (category_id, name, description, price, image_path, is_active) VALUES
+(1, 'Special Rice & Curry',     'White rice with 3 curries, papadum and salad',      450.00, 'uploads/dishes/biriyani.jpg', 1),
+(1, 'Chicken Biriyani',         'Fragrant basmati rice with spiced chicken',          550.00, 'uploads/dishes/biriyani.jpg', 1),
+(1, 'Vegetable Rice Plate',     'Rice with 3 vegetable curries',                      380.00, 'uploads/dishes/biriyani.jpg', 1),
+(1, 'Prawn Biriyani',           'Basmati rice with whole prawns',                     700.00, 'uploads/dishes/biriyani.jpg', 1),
+(2, 'Chicken Kottu',            'Shredded gothambu roti with chicken and vegetables', 480.00, 'uploads/dishes/kottu.jpg', 1),
+(2, 'Egg Kottu',                'Classic egg kottu with onion and leek',              380.00, 'uploads/dishes/kottu.jpg', 1),
+(2, 'Cheese Kottu',             'Kottu loaded with melted cheese',                    520.00, 'uploads/dishes/kottu.jpg', 1),
+(3, 'Classic Beef Burger',      'Beef patty, lettuce, tomato, cheese',                550.00, 'uploads/dishes/burger.jpg', 1),
+(3, 'Spicy Chicken Burger',     'Crispy fried chicken with chilli mayo',              520.00, 'uploads/dishes/burger.jpg', 1),
+(3, 'Chicken Caesar Wrap',      'Grilled chicken, romaine, parmesan, caesar dressing', 490.00, 'uploads/dishes/burger.jpg', 1),
+(4, 'Spaghetti Bolognese',      'Slow-cooked beef ragu, parmesan',                    620.00, 'uploads/dishes/pasta.jpg', 1),
+(4, 'Pad Thai Noodles',         'Rice noodles, peanuts, spring onion, egg',           540.00, 'uploads/dishes/pasta.jpg', 1),
+(5, 'BBQ Chicken Platter',      'Half BBQ chicken with coleslaw and garlic bread',    850.00, 'uploads/dishes/bbq.jpg', 1),
+(5, 'Grilled Fish Plate',       'Fresh grilled seer fish with salad and rice',        750.00, 'uploads/dishes/bbq.jpg', 1),
+(6, 'Tomato Basil Soup',        'Classic tomato basil soup with garlic croutons',     290.00, 'uploads/dishes/soup.jpg', 1),
+(6, 'Grilled Chicken Salad',    'Mixed greens, grilled chicken, vinaigrette',         420.00, 'uploads/dishes/soup.jpg', 1),
+(7, 'Chocolate Lava Cake',      'Warm chocolate cake with vanilla ice cream',         350.00, 'uploads/dishes/lava_cake.jpg', 1),
+(7, 'Watalappan',               'Traditional Sri Lankan coconut custard pudding',     220.00, 'uploads/dishes/lava_cake.jpg', 1),
+(8, 'Fresh Mango Lassi',        'Blended mango with yoghurt',                         220.00, 'uploads/dishes/beverage.jpg', 1),
+(8, 'Iced Coffee',              'Cold brew with condensed milk',                      280.00, 'uploads/dishes/beverage.jpg', 1),
+(8, 'Fresh Lime Juice',         'Squeezed lime with a pinch of salt',                 150.00, 'uploads/dishes/beverage.jpg', 1),
+(8, 'Strawberry Milkshake',     'Thick strawberry milkshake',                         320.00, 'uploads/dishes/beverage.jpg', 1);
 
 -- ── Inventory (seed for Component B) ──────────────────────────────────────
 INSERT IGNORE INTO inventory (dish_id, qty_available, reorder_level)

@@ -76,10 +76,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     u.username, u.email, r.role_name, u.role_id
                FROM users u
                JOIN roles r ON r.role_id = u.role_id
-              WHERE u.email = :id OR u.username = :id
+              WHERE u.email = :email_id OR u.username = :username_id
               LIMIT 1'
         );
-        $stmt->execute([':id' => $loginIdentifier]);
+        $stmt->execute([
+            ':email_id'    => $loginIdentifier,
+            ':username_id' => $loginIdentifier,
+        ]);
         $user = $stmt->fetch();
 
         // ── Verify ──────────────────────────────────────
