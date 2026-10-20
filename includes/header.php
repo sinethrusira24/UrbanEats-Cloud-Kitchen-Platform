@@ -20,6 +20,7 @@ $currentRole = current_user_role();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?></title>
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 <body>
 
@@ -42,8 +43,15 @@ $currentRole = current_user_role();
             <nav>
                 <ul class="nav-links" id="mainNav">
                     <li><a href="<?= base_url('index.php') ?>" class="nav-link">Home</a></li>
+                    <li><a href="<?= base_url('menu/index.php') ?>" class="nav-link">Menu</a></li>
 
                     <?php if (is_logged_in()): ?>
+                        <?php if ($currentRole === 'kitchen_staff' || $currentRole === 'admin'): ?>
+                            <li><a href="<?= base_url('menu/manage.php') ?>" class="nav-link">Dishes</a></li>
+                            <li><a href="<?= base_url('menu/stock.php') ?>" class="nav-link">Stock</a></li>
+                            <li><a href="<?= base_url('menu/categories.php') ?>" class="nav-link">Categories</a></li>
+                        <?php endif; ?>
+
                         <?php if ($currentRole === 'admin'): ?>
                             <li><a href="<?= base_url('admin/index.php') ?>" class="nav-link">Dashboard</a></li>
                             <li><a href="<?= base_url('admin/users.php') ?>" class="nav-link">User Management</a></li>
