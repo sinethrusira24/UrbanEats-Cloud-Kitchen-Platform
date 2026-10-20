@@ -1,0 +1,605 @@
+/**
+ * UrbanEats Cloud Kitchen Platform
+ * Component B: Menu, Catalogue and Inventory
+ * Dedicated Stylesheet (Scoped to Component B)
+ *
+ * Adheres strictly to Component A's Emerald Green & Crisp White design tokens.
+ * Responsive Breakpoints: 360px (mobile), 768px (tablet), 1200px+ (desktop).
+ */
+
+/* ── Category Filter Pills ──────────────────────────────────── */
+.category-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0.25rem 0.75rem;
+  margin-bottom: 1.5rem;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.category-pills::-webkit-scrollbar {
+  height: 4px;
+}
+
+.category-pills::-webkit-scrollbar-thumb {
+  background: var(--border-color, #e2e8f0);
+  border-radius: 9999px;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  color: var(--text-main, #0f172a);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.category-pill:hover {
+  border-color: var(--primary, #059669);
+  color: var(--primary, #059669);
+  background: var(--primary-light, #ecfdf5);
+  transform: translateY(-1px);
+}
+
+.category-pill.active {
+  background: var(--primary, #059669);
+  border-color: var(--primary, #059669);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(5, 150, 105, 0.25);
+}
+
+.pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.06);
+  color: inherit;
+}
+
+.category-pill.active .pill-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Menu Filter Bar (Search, Category, Sorting) ───────────── */
+.menu-filter-bar {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.filter-search-wrap {
+  flex: 1 1 280px;
+  position: relative;
+}
+
+.filter-search-input {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 2.5rem;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  color: var(--text-main, #0f172a);
+  background: var(--bg-input, #ffffff);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filter-search-input:focus {
+  border-color: var(--primary, #059669);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+
+.filter-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim, #94a3b8);
+  pointer-events: none;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  padding: 0.65rem 2rem 0.65rem 0.85rem;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--text-main, #0f172a);
+  background: var(--bg-card, #ffffff);
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-select:focus {
+  border-color: var(--primary, #059669);
+}
+
+/* ── Menu Grid & Dish Cards ────────────────────────────────── */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.dish-card {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+.dish-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
+}
+
+.dish-card-img-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 60%;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.dish-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.dish-card:hover .dish-card-img {
+  transform: scale(1.05);
+}
+
+.dish-badge-overlay {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+}
+
+.dish-stock-overlay {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+}
+
+.dish-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dish-card-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--primary, #059669);
+  margin-bottom: 0.35rem;
+}
+
+.dish-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-main, #0f172a);
+  margin: 0 0 0.5rem;
+}
+
+.dish-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dish-card-title a:hover {
+  color: var(--primary, #059669);
+}
+
+.dish-card-desc {
+  font-size: 0.875rem;
+  color: var(--text-muted, #475569);
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.dish-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-light, #f1f5f9);
+  padding-top: 0.875rem;
+  margin-top: auto;
+}
+
+.dish-price-tag {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary, #059669);
+  font-feature-settings: "tnum";
+}
+
+/* ── Dish Details Showcase ──────────────────────────────────── */
+.dish-detail-container {
+  padding: 2rem 0 4rem;
+}
+
+.dish-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.dish-detail-gallery {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: #f1f5f9;
+  min-height: 380px;
+}
+
+.dish-detail-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dish-detail-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.dish-detail-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-main, #0f172a);
+  margin: 0 0 1rem;
+}
+
+.dish-detail-price {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--primary, #059669);
+  margin-bottom: 1.5rem;
+}
+
+.dish-detail-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-muted, #475569);
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.portion-meter-box {
+  background: var(--bg-subtle, #f1f5f9);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* ── Stock Dashboard KPI Cards ─────────────────────────────── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.kpi-val {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-main, #0f172a);
+  margin-bottom: 0.35rem;
+}
+
+.kpi-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #475569);
+}
+
+.kpi-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* ── Stock Visual Progress Bars ────────────────────────────── */
+.stock-bar-wrap {
+  width: 100%;
+  max-width: 160px;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.stock-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.stock-bar-fill.high { background: #059669; }
+.stock-bar-fill.medium { background: #d97706; }
+.stock-bar-fill.low { background: #dc2626; }
+
+/* ── Image Upload Dropzone ──────────────────────────────────── */
+.image-dropzone {
+  border: 2px dashed var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.image-dropzone:hover,
+.image-dropzone.dragover {
+  border-color: var(--primary, #059669);
+  background: var(--primary-light, #ecfdf5);
+}
+
+.image-preview-box {
+  width: 100%;
+  max-width: 260px;
+  height: 160px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem auto 0;
+  border: 1px solid var(--border-color, #e2e8f0);
+  display: none;
+}
+
+.image-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Modals (Restock / Wastage) ─────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--bg-card, #ffffff);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: modalEnter 0.25s ease-out;
+}
+
+@keyframes modalEnter {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main, #0f172a);
+  margin: 0;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-dim, #94a3b8);
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* ── Pagination Controls ────────────────────────────────────── */
+.pagination-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color, #e2e8f0);
+}
+
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 0.75rem;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 8px;
+  background: var(--bg-card, #ffffff);
+  color: var(--text-main, #0f172a);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(.disabled) {
+  border-color: var(--primary, #059669);
+  color: var(--primary, #059669);
+  background: var(--primary-light, #ecfdf5);
+}
+
+.pagination-btn.active {
+  background: var(--primary, #059669);
+  border-color: var(--primary, #059669);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.pagination-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Responsive Media Queries ───────────────────────────────── */
+@media (max-width: 992px) {
+  .dish-detail-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  
+  .menu-filter-bar {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dish-detail-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .category-pill {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+}

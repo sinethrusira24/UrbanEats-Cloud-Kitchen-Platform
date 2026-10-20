@@ -29,8 +29,8 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
             <?php if (!is_logged_in()): ?>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
-                    <a href="<?= base_url('auth/login.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
-                        Sign In to Order &rarr;
+                    <a href="<?= base_url('menu/index.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
+                        🍽️ Browse Menu Catalogue &rarr;
                     </a>
                     <a href="<?= base_url('auth/register.php') ?>" class="btn btn-outline" style="padding: 0.9rem 2rem; font-size: 1rem;">
                         Create Free Account
@@ -38,19 +38,32 @@ require_once dirname(__DIR__) . '/includes/header.php';
                 </div>
             <?php else: ?>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
-                    <?php if (current_user_role() === 'admin'): ?>
+                    <?php if (current_user_role() === 'kitchen_staff'): ?>
+                        <a href="<?= base_url('menu/stock.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
+                            📊 Stock Dashboard &rarr;
+                        </a>
+                        <a href="<?= base_url('menu/manage.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
+                            Manage Dishes
+                        </a>
+                        <a href="<?= base_url('menu/index.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
+                            View Menu
+                        </a>
+                    <?php elseif (current_user_role() === 'admin'): ?>
                         <a href="<?= base_url('admin/index.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
                             Open Admin Dashboard &rarr;
+                        </a>
+                        <a href="<?= base_url('menu/stock.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
+                            Stock Dashboard
                         </a>
                         <a href="<?= base_url('admin/users.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
                             Manage Users
                         </a>
                     <?php else: ?>
-                        <a href="<?= base_url('auth/profile.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
-                            View My Profile &rarr;
+                        <a href="<?= base_url('menu/index.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
+                            🍽️ Browse Menu Catalogue &rarr;
                         </a>
-                        <a href="<?= base_url('auth/change-password.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
-                            Security Settings
+                        <a href="<?= base_url('auth/profile.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
+                            View My Profile
                         </a>
                     <?php endif; ?>
                 </div>
