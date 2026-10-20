@@ -166,7 +166,3 @@ urbaneats/
 | Credential Leakage | `config.local.php` in `.gitignore`; `config.sample.php` committed |
 | Privilege Escalation | `require_role()` on every protected page |
 | Session Hijack | `httponly`, `samesite=Lax` cookie flags; idle timeout |
-
----
-
-*Built with ❤️ in Sri Lanka for IT3113 Advanced Web Technologies.*
