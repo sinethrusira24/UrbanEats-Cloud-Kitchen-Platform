@@ -90,32 +90,49 @@ include dirname(__DIR__, 2) . '/includes/header.php';
 
     <!-- Menu Catalogue Header -->
     <div class="menu-catalogue-header">
-        <div class="header-live-badge">
-            <span class="pulse-indicator">
-                <span class="pulse-ring"></span>
-                <span class="pulse-dot"></span>
-            </span>
-            Freshly Prepared Everyday
-        </div>
-        <h1 class="header-title">Cloud Kitchen <span class="text-gradient">Catalogue</span></h1>
-        <p class="header-desc">
-            Explore our curated culinary creations crafted fresh in our Colombo cloud kitchens. Fast delivery guaranteed.
-        </p>
-        <div class="header-highlights">
-            <span class="highlight-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                30–45m Express Delivery
-            </span>
-            <span class="highlight-divider">•</span>
-            <span class="highlight-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                100% Fresh & Authentic
-            </span>
-            <span class="highlight-divider">•</span>
-            <span class="highlight-item">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"></path><line x1="6" y1="17" x2="18" y2="17"></line></svg>
-                Chef Handcrafted
-            </span>
+        <!-- Decorative Background Watermark Accents -->
+        <svg class="header-bg-accent header-bg-accent-left" width="160" height="160" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+            <circle cx="80" cy="80" r="68" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 6"/>
+            <circle cx="80" cy="80" r="42" stroke="currentColor" stroke-width="1"/>
+            <circle cx="80" cy="80" r="16" stroke="currentColor" stroke-width="0.8"/>
+            <path d="M80 6v148M6 80h148" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2 4"/>
+        </svg>
+        <svg class="header-bg-accent header-bg-accent-right" width="160" height="160" viewBox="0 0 160 160" fill="none" aria-hidden="true">
+            <path d="M50 102c0-26 13.4-42 30-42s30 16 30 42H50z" stroke="currentColor" stroke-width="1.3"/>
+            <line x1="42" y1="108" x2="118" y2="108" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="80" cy="54" r="4" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M125 45l3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8z" fill="currentColor"/>
+            <path d="M35 120l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z" fill="currentColor"/>
+        </svg>
+
+        <div class="header-content-inner">
+            <div class="header-live-badge">
+                <span class="pulse-indicator">
+                    <span class="pulse-ring"></span>
+                    <span class="pulse-dot"></span>
+                </span>
+                Freshly Prepared Everyday
+            </div>
+            <h1 class="header-title">Cloud Kitchen <span class="text-gradient">Catalogue</span></h1>
+            <p class="header-desc">
+                Explore our curated culinary creations crafted fresh in our Colombo cloud kitchens. Fast delivery guaranteed.
+            </p>
+            <div class="header-highlights">
+                <span class="highlight-item">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    30–45m Express Delivery
+                </span>
+                <span class="highlight-divider">•</span>
+                <span class="highlight-item">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    100% Fresh & Authentic
+                </span>
+                <span class="highlight-divider">•</span>
+                <span class="highlight-item">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"></path><line x1="6" y1="17" x2="18" y2="17"></line></svg>
+                    Chef Handcrafted
+                </span>
+            </div>
         </div>
     </div>
 

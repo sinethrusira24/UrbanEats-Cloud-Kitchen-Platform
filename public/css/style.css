@@ -22,11 +22,11 @@
   --primary-shadow: 0 4px 14px rgba(5, 150, 105, 0.28);
 
   /* Backgrounds & Neutrals */
-  --bg-main: #f8fafc;          /* Clean Light Gray/Slate */
+  --bg-main: #f1f5f9;          /* Sophisticated Cool Slate (Subtly darker for crisp card contrast) */
   --bg-card: #ffffff;          /* Pure Crisp White */
-  --bg-card-hover: #f1f5f9;
+  --bg-card-hover: #f8fafc;
   --bg-input: #ffffff;
-  --bg-subtle: #f1f5f9;
+  --bg-subtle: #e2e8f0;
 
   /* Typography / Text Colors */
   --text-main: #0f172a;        /* Deep Slate 900 (High contrast) */

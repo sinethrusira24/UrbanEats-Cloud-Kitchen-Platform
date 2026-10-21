@@ -11,9 +11,63 @@
 .menu-catalogue-header {
   position: relative;
   text-align: center;
-  padding: 1.25rem 1rem 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: 2.25rem 1.5rem 1.75rem;
+  margin-bottom: 1.75rem;
   background: transparent;
+  overflow: hidden;
+}
+
+/* Creative Subtle Architectural Dot Grid Pattern with Seamless Radial Fade */
+.menu-catalogue-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at center, rgba(16, 185, 129, 0.22) 1.2px, transparent 1.2px),
+    radial-gradient(circle at center, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px, 12px 12px;
+  background-position: 0 0, 6px 6px;
+  mask-image: radial-gradient(ellipse 65% 60% at 50% 48%, rgba(0, 0, 0, 0.9) 15%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 50% 48%, rgba(0, 0, 0, 0.9) 15%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Decorative Watermark Culinary Accents */
+.header-bg-accent {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary, #059669);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.header-bg-accent-left {
+  left: 3%;
+}
+
+.header-bg-accent-right {
+  right: 3%;
+}
+
+@media (max-width: 900px) {
+  .header-bg-accent {
+    opacity: 0.06;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-bg-accent {
+    display: none;
+  }
+}
+
+.header-content-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .header-live-badge {
