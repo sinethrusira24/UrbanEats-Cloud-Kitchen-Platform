@@ -7,56 +7,256 @@
  * Responsive Breakpoints: 360px (mobile), 768px (tablet), 1200px+ (desktop).
  */
 
-/* ── Category Filter Pills ──────────────────────────────────── */
+/* ── Modern Menu Catalogue Header & Hero Section ─────────── */
+.menu-catalogue-header {
+  position: relative;
+  text-align: center;
+  padding: 2.25rem 1.5rem 1.75rem;
+  margin-bottom: 1.75rem;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Creative Subtle Architectural Dot Grid Pattern with Seamless Radial Fade */
+.menu-catalogue-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at center, rgba(16, 185, 129, 0.22) 1.2px, transparent 1.2px),
+    radial-gradient(circle at center, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px, 12px 12px;
+  background-position: 0 0, 6px 6px;
+  mask-image: radial-gradient(ellipse 65% 60% at 50% 48%, rgba(0, 0, 0, 0.9) 15%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 50% 48%, rgba(0, 0, 0, 0.9) 15%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Decorative Watermark Culinary Accents */
+.header-bg-accent {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary, #059669);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.header-bg-accent-left {
+  left: 3%;
+}
+
+.header-bg-accent-right {
+  right: 3%;
+}
+
+@media (max-width: 900px) {
+  .header-bg-accent {
+    opacity: 0.06;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-bg-accent {
+    display: none;
+  }
+}
+
+.header-content-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.header-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #047857;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.pulse-indicator {
+  position: relative;
+  display: flex;
+  width: 8px;
+  height: 8px;
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background-color: #10b981;
+  opacity: 0.75;
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.pulse-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #059669;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.header-title {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 0.65rem;
+  color: var(--text-main, #0f172a);
+  letter-spacing: -0.02em;
+}
+
+.header-title .text-gradient {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-desc {
+  color: var(--text-muted, #475569);
+  max-width: 580px;
+  margin: 0 auto 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.header-highlights {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted, #64748b);
+}
+
+.highlight-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.highlight-divider {
+  color: #cbd5e1;
+  font-size: 0.875rem;
+}
+
+/* ── Modern Category Pills Carousel (Hidden Native Scrollbar) ─ */
+.category-carousel-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--border-color, #e2e8f0);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  color: var(--text-main, #0f172a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.95;
+}
+
+.carousel-nav-btn:hover {
+  background: var(--primary-light, #ecfdf5);
+  color: var(--primary, #059669);
+  border-color: var(--primary, #059669);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.2);
+}
+
+.carousel-nav-btn.carousel-prev {
+  left: -8px;
+}
+
+.carousel-nav-btn.carousel-next {
+  right: -8px;
+}
+
 .category-pills {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   overflow-x: auto;
-  padding: 0.5rem 0.25rem 0.75rem;
-  margin-bottom: 1.5rem;
-  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  padding: 0.5rem 0.25rem 0.65rem;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
   -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 .category-pills::-webkit-scrollbar {
-  height: 4px;
-}
-
-.category-pills::-webkit-scrollbar-thumb {
-  background: var(--border-color, #e2e8f0);
-  border-radius: 9999px;
+  display: none; /* Hide Chrome/Safari/Edge scrollbar completely */
 }
 
 .category-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
   border-radius: 9999px;
-  background: var(--bg-card, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   color: var(--text-main, #0f172a);
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  flex-shrink: 0;
+  user-select: none;
 }
 
 .category-pill:hover {
   border-color: var(--primary, #059669);
   color: var(--primary, #059669);
-  background: var(--primary-light, #ecfdf5);
-  transform: translateY(-1px);
+  background: #f0fdf4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.12);
 }
 
 .category-pill.active {
-  background: var(--primary, #059669);
-  border-color: var(--primary, #059669);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  border-color: #059669;
   color: #ffffff;
-  box-shadow: 0 3px 10px rgba(5, 150, 105, 0.25);
+  box-shadow: 0 6px 16px -2px rgba(5, 150, 105, 0.38);
+  font-weight: 600;
+  transform: translateY(-1px);
 }
 
 .pill-count {
@@ -64,50 +264,58 @@
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
-  padding: 0.1rem 0.45rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
   border-radius: 9999px;
-  background: rgba(0, 0, 0, 0.06);
-  color: inherit;
+  background: #f1f5f9;
+  color: #64748b;
+  min-width: 20px;
+  transition: all 0.2s ease;
 }
 
 .category-pill.active .pill-count {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
 }
 
-/* ── Menu Filter Bar (Search, Category, Sorting) ───────────── */
+/* ── Modern Menu Filter Bar (Search, Category, Sorting) ───── */
 .menu-filter-bar {
-  background: var(--bg-card, #ffffff);
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 1.25rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  gap: 0.75rem;
+  box-shadow: none;
 }
 
 .filter-search-wrap {
-  flex: 1 1 280px;
+  flex: 1 1 260px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .filter-search-input {
   width: 100%;
-  padding: 0.65rem 1rem 0.65rem 2.5rem;
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: 8px;
+  padding: 0.72rem 2.25rem 0.72rem 2.6rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 0.9375rem;
   color: var(--text-main, #0f172a);
-  background: var(--bg-input, #ffffff);
+  background: #ffffff;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s ease;
 }
 
 .filter-search-input:focus {
+  background: #ffffff;
   border-color: var(--primary, #059669);
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15), 0 2px 6px rgba(15, 23, 42, 0.04);
 }
 
 .filter-search-icon {
@@ -115,30 +323,193 @@
   left: 0.85rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--text-dim, #94a3b8);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
   pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.filter-search-input:focus ~ .filter-search-icon {
+  color: var(--primary, #059669);
+}
+
+.filter-search-clear {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e2e8f0;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.filter-search-clear:hover {
+  background: #cbd5e1;
+  color: #0f172a;
 }
 
 .filter-controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   flex-wrap: wrap;
 }
 
+.filter-select-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.filter-select-icon {
+  position: absolute;
+  left: 0.85rem;
+  pointer-events: none;
+  color: #64748b;
+}
+
+.filter-chevron {
+  position: absolute;
+  right: 0.75rem;
+  pointer-events: none;
+  color: #64748b;
+  transition: transform 0.2s ease;
+}
+
 .filter-select {
-  padding: 0.65rem 2rem 0.65rem 0.85rem;
-  border: 1px solid var(--border-color, #e2e8f0);
-  border-radius: 8px;
+  padding: 0.72rem 2.2rem 0.72rem 2.35rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 0.875rem;
+  font-weight: 500;
   color: var(--text-main, #0f172a);
-  background: var(--bg-card, #ffffff);
+  background: #ffffff;
   cursor: pointer;
   outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s ease;
+}
+
+.filter-select:hover {
+  border-color: #cbd5e1;
 }
 
 .filter-select:focus {
   border-color: var(--primary, #059669);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+}
+
+.btn-filter-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.72rem 1.25rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border: none;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-filter-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.btn-filter-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s ease;
+}
+
+.btn-filter-reset:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+/* ── Active Filter Tags Row ───────────────────────────────── */
+.active-filter-chips {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+  padding: 0 0.25rem;
+}
+
+.active-filter-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.75rem;
+  border-radius: 9999px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.filter-chip:hover {
+  background: #d1fae5;
+  border-color: #6ee7b7;
+  color: #047857;
+}
+
+.filter-chip-remove {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #059669;
+}
+
+.filter-clear-all {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #ef4444;
+  text-decoration: underline;
+  margin-left: 0.25rem;
+  transition: opacity 0.15s ease;
+}
+
+.filter-clear-all:hover {
+  opacity: 0.8;
 }
 
 /* ── Menu Grid & Dish Cards ────────────────────────────────── */
