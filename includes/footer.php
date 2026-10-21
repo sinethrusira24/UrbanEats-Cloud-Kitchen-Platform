@@ -11,11 +11,6 @@ declare(strict_types=1);
 
 <footer class="site-footer">
     <div class="container">
-        <div class="footer-inner">
-            <div>
-                <span class="footer-brand">UrbanEats Cloud Kitchen Platform</span>
-            </div>
-        </div>
         <p class="footer-copy">
             &copy; <?= date('Y') ?> UrbanEats Platform. All rights reserved.
         </p>

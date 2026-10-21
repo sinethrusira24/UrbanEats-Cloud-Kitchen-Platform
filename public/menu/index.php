@@ -1,19 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Public Menu Catalogue Page
- *
- * Requirements:
- * - Dynamic category filtering with active counters
- * - Server-side keyword search (dishes & descriptions)
- * - Strict server-side sort whitelist (price_asc, price_desc, name_asc, name_desc)
- * - Concurrency & inventory aware portion availability badges
- * - Full pagination preserving search/sort/filter query strings
- * - Strictly prepared PDO statements for all user inputs
- */
-
 declare(strict_types=1);
 
 require_once dirname(__DIR__, 2) . '/includes/bootstrap.php';
@@ -103,74 +88,201 @@ $extraHead = '<link rel="stylesheet" href="' . base_url('css/component-b.css') .
 include dirname(__DIR__, 2) . '/includes/header.php';
 ?>
 
-<div class="container" style="padding: 1.5rem 0 3rem;">
-
     <!-- Menu Catalogue Header -->
-    <div style="margin-bottom: 2rem; text-align: center;">
-        <span class="badge badge-success" style="font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;">Freshly Prepared Everyday</span>
-        <h1 style="font-size: 2.25rem; font-weight: 800; margin: 0.5rem 0 0.5rem; color: var(--text-main);">Cloud Kitchen Catalogue</h1>
-        <p style="color: var(--text-muted); max-width: 620px; margin: 0 auto; font-size: 1rem;">
+    <div class="menu-catalogue-header">
+        <div class="header-live-badge">
+            <span class="pulse-indicator">
+                <span class="pulse-ring"></span>
+                <span class="pulse-dot"></span>
+            </span>
+            Freshly Prepared Everyday
+        </div>
+        <h1 class="header-title">Cloud Kitchen <span class="text-gradient">Catalogue</span></h1>
+        <p class="header-desc">
             Explore our curated culinary creations crafted fresh in our Colombo cloud kitchens. Fast delivery guaranteed.
         </p>
+        <div class="header-highlights">
+            <span class="highlight-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                30–45m Express Delivery
+            </span>
+            <span class="highlight-divider">•</span>
+            <span class="highlight-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                100% Fresh & Authentic
+            </span>
+            <span class="highlight-divider">•</span>
+            <span class="highlight-item">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"></path><line x1="6" y1="17" x2="18" y2="17"></line></svg>
+                Chef Handcrafted
+            </span>
+        </div>
     </div>
 
-    <!-- Category Filter Pills -->
-    <div class="category-pills">
-        <a href="<?= base_url('menu/index.php?' . http_build_query(array_filter(['q' => $searchQuery, 'sort' => $sortBy]))) ?>"
-           class="category-pill <?= $categoryFilter === null ? 'active' : '' ?>">
-            <span>🍽️</span> All Dishes
-            <span class="pill-count"><?= array_sum(array_column($activeCategories, 'dish_count')) ?></span>
-        </a>
-        <?php foreach ($activeCategories as $cat): ?>
-            <?php
-            $catUrlParams = array_filter([
-                'cat'  => $cat['category_id'],
-                'q'    => $searchQuery !== '' ? $searchQuery : null,
-                'sort' => $sortBy !== 'name_asc' ? $sortBy : null,
-            ]);
-            $isCatActive = ($categoryFilter === (int)$cat['category_id']);
-            ?>
-            <a href="<?= base_url('menu/index.php?' . http_build_query($catUrlParams)) ?>"
-               class="category-pill <?= $isCatActive ? 'active' : '' ?>">
-                <?= e($cat['name']) ?>
-                <span class="pill-count"><?= (int)$cat['dish_count'] ?></span>
+    <!-- Category Filter Carousel (Clean, modern swipe strip without OS scrollbars or emojis) -->
+    <div class="category-carousel-wrapper">
+        <button type="button" class="carousel-nav-btn carousel-prev" id="catScrollLeft" aria-label="Scroll categories left">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+
+        <div class="category-pills" id="categoryPillsStrip">
+            <a href="<?= base_url('menu/index.php?' . http_build_query(array_filter(['q' => $searchQuery, 'sort' => $sortBy]))) ?>"
+               class="category-pill <?= $categoryFilter === null ? 'active' : '' ?>">
+                <span>All Dishes</span>
+                <span class="pill-count"><?= array_sum(array_column($activeCategories, 'dish_count')) ?></span>
             </a>
-        <?php endforeach; ?>
+            <?php foreach ($activeCategories as $cat): ?>
+                <?php
+                $catUrlParams = array_filter([
+                    'cat'  => $cat['category_id'],
+                    'q'    => $searchQuery !== '' ? $searchQuery : null,
+                    'sort' => $sortBy !== 'name_asc' ? $sortBy : null,
+                ]);
+                $isCatActive = ($categoryFilter === (int)$cat['category_id']);
+                ?>
+                <a href="<?= base_url('menu/index.php?' . http_build_query($catUrlParams)) ?>"
+                   class="category-pill <?= $isCatActive ? 'active' : '' ?>">
+                    <span><?= e($cat['name']) ?></span>
+                    <span class="pill-count"><?= (int)$cat['dish_count'] ?></span>
+                </a>
+            <?php endforeach; ?>
+        </div>
+
+        <button type="button" class="carousel-nav-btn carousel-next" id="catScrollRight" aria-label="Scroll categories right">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
     </div>
 
-    <!-- Search, Sort & Filter Control Bar -->
-    <form method="GET" action="<?= base_url('menu/index.php') ?>" class="menu-filter-bar">
+    <!-- Modern Search, Sort & Filter Bar -->
+    <form method="GET" action="<?= base_url('menu/index.php') ?>" class="menu-filter-bar" id="menuFilterForm">
         <?php if ($categoryFilter !== null): ?>
             <input type="hidden" name="cat" value="<?= (int)$categoryFilter ?>">
         <?php endif; ?>
 
         <div class="filter-search-wrap">
-            <span class="filter-search-icon">🔍</span>
+            <span class="filter-search-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </span>
             <input type="text"
                    name="q"
+                   id="menuSearchInput"
                    value="<?= e($searchQuery) ?>"
                    placeholder="Search dishes by name or ingredients..."
                    class="filter-search-input"
-                   aria-label="Search dishes">
+                   aria-label="Search dishes"
+                   autocomplete="off">
+            <?php if ($searchQuery !== ''): ?>
+                <button type="button" class="filter-search-clear" id="searchClearBtn" title="Clear search" aria-label="Clear search">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            <?php endif; ?>
         </div>
 
         <div class="filter-controls">
-            <select name="sort" class="filter-select" onchange="this.form.submit()" aria-label="Sort dishes by">
-                <option value="name_asc" <?= $sortBy === 'name_asc' ? 'selected' : '' ?>>Sort: Name (A to Z)</option>
-                <option value="name_desc" <?= $sortBy === 'name_desc' ? 'selected' : '' ?>>Sort: Name (Z to A)</option>
-                <option value="price_asc" <?= $sortBy === 'price_asc' ? 'selected' : '' ?>>Sort: Price (Low to High)</option>
-                <option value="price_desc" <?= $sortBy === 'price_desc' ? 'selected' : '' ?>>Sort: Price (High to Low)</option>
-            </select>
+            <div class="filter-select-wrap">
+                <svg class="filter-select-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" y1="6" x2="11" y2="6"></line>
+                    <line x1="4" y1="12" x2="16" y2="12"></line>
+                    <line x1="4" y1="18" x2="20" y2="18"></line>
+                </svg>
+                <select name="sort" class="filter-select" onchange="this.form.submit()" aria-label="Sort dishes by">
+                    <option value="name_asc" <?= $sortBy === 'name_asc' ? 'selected' : '' ?>>Sort: Name (A to Z)</option>
+                    <option value="name_desc" <?= $sortBy === 'name_desc' ? 'selected' : '' ?>>Sort: Name (Z to A)</option>
+                    <option value="price_asc" <?= $sortBy === 'price_asc' ? 'selected' : '' ?>>Sort: Price (Low to High)</option>
+                    <option value="price_desc" <?= $sortBy === 'price_desc' ? 'selected' : '' ?>>Sort: Price (High to Low)</option>
+                </select>
+                <svg class="filter-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
 
-            <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+            <button type="submit" class="btn-filter-submit">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                <span>Filter</span>
+            </button>
 
             <?php if ($searchQuery !== '' || $categoryFilter !== null || $sortBy !== 'name_asc'): ?>
-                <a href="<?= base_url('menu/index.php') ?>" class="btn btn-outline btn-sm" title="Clear all filters">
-                    ✕ Reset
+                <a href="<?= base_url('menu/index.php') ?>" class="btn-filter-reset" title="Clear all filters">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span>Reset</span>
                 </a>
             <?php endif; ?>
         </div>
     </form>
+
+    <!-- Active Filter Tags (Quick Remove Pills) -->
+    <?php
+    $hasActiveFilters = ($searchQuery !== '' || $categoryFilter !== null || $sortBy !== 'name_asc');
+    ?>
+    <?php if ($hasActiveFilters): ?>
+        <div class="active-filter-chips">
+            <span class="active-filter-label">Active Filters:</span>
+
+            <?php if ($categoryFilter !== null): ?>
+                <?php
+                $activeCatObj = null;
+                foreach ($activeCategories as $c) {
+                    if ((int)$c['category_id'] === $categoryFilter) {
+                        $activeCatObj = $c;
+                        break;
+                    }
+                }
+                $catRemoveUrl = base_url('menu/index.php?' . http_build_query(array_filter([
+                    'q'    => $searchQuery !== '' ? $searchQuery : null,
+                    'sort' => $sortBy !== 'name_asc' ? $sortBy : null,
+                ])));
+                ?>
+                <a href="<?= $catRemoveUrl ?>" class="filter-chip" title="Remove category filter">
+                    <span>Category: <strong><?= e($activeCatObj['name'] ?? 'Selected') ?></strong></span>
+                    <span class="filter-chip-remove">✕</span>
+                </a>
+            <?php endif; ?>
+
+            <?php if ($searchQuery !== ''): ?>
+                <?php
+                $searchRemoveUrl = base_url('menu/index.php?' . http_build_query(array_filter([
+                    'cat'  => $categoryFilter,
+                    'sort' => $sortBy !== 'name_asc' ? $sortBy : null,
+                ])));
+                ?>
+                <a href="<?= $searchRemoveUrl ?>" class="filter-chip" title="Remove search query">
+                    <span>Search: "<strong><?= e($searchQuery) ?></strong>"</span>
+                    <span class="filter-chip-remove">✕</span>
+                </a>
+            <?php endif; ?>
+
+            <?php if ($sortBy !== 'name_asc'): ?>
+                <?php
+                $sortLabels = [
+                    'name_desc'  => 'Name: Z to A',
+                    'price_asc'  => 'Price: Low to High',
+                    'price_desc' => 'Price: High to Low',
+                ];
+                $sortRemoveUrl = base_url('menu/index.php?' . http_build_query(array_filter([
+                    'cat' => $categoryFilter,
+                    'q'   => $searchQuery !== '' ? $searchQuery : null,
+                ])));
+                ?>
+                <a href="<?= $sortRemoveUrl ?>" class="filter-chip" title="Reset sorting">
+                    <span>Sort: <strong><?= $sortLabels[$sortBy] ?? $sortBy ?></strong></span>
+                    <span class="filter-chip-remove">✕</span>
+                </a>
+            <?php endif; ?>
+
+            <a href="<?= base_url('menu/index.php') ?>" class="filter-clear-all">Clear all</a>
+        </div>
+    <?php endif; ?>
 
     <!-- Results Count Bar -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.875rem; color: var(--text-muted);">
@@ -198,7 +310,13 @@ include dirname(__DIR__, 2) . '/includes/header.php';
     <!-- Dish Cards Grid -->
     <?php if (empty($dishes)): ?>
         <div class="card text-center" style="padding: 4rem 2rem; border: 2px dashed var(--border-color); background: #ffffff;">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">🍲</div>
+            <div style="margin-bottom: 1rem; color: var(--text-dim);">
+                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+            </div>
             <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-main);">No Dishes Found</h2>
             <p style="color: var(--text-muted); max-width: 440px; margin: 0 auto 1.5rem;">
                 We couldn't find any items matching your active search or category filters. Try checking your spelling or clearing filters.
@@ -314,6 +432,83 @@ include dirname(__DIR__, 2) . '/includes/header.php';
         <?php endif; ?>
     <?php endif; ?>
 
-</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // ── Carousel Controls ──────────────────────────────────────────
+    const strip = document.getElementById('categoryPillsStrip');
+    const btnLeft = document.getElementById('catScrollLeft');
+    const btnRight = document.getElementById('catScrollRight');
+
+    if (strip && btnLeft && btnRight) {
+        function updateNavState() {
+            const maxScroll = strip.scrollWidth - strip.clientWidth;
+            btnLeft.style.display = strip.scrollLeft <= 5 ? 'none' : 'flex';
+            btnRight.style.display = (strip.scrollLeft >= maxScroll - 5) ? 'none' : 'flex';
+        }
+
+        btnLeft.addEventListener('click', function() {
+            strip.scrollBy({ left: -260, behavior: 'smooth' });
+        });
+
+        btnRight.addEventListener('click', function() {
+            strip.scrollBy({ left: 260, behavior: 'smooth' });
+        });
+
+        strip.addEventListener('scroll', updateNavState, { passive: true });
+
+        // Auto-center active pill on initial page load
+        const activePill = strip.querySelector('.category-pill.active');
+        if (activePill) {
+            const pillOffset = activePill.offsetLeft - (strip.clientWidth / 2) + (activePill.clientWidth / 2);
+            strip.scrollTo({ left: Math.max(0, pillOffset), behavior: 'smooth' });
+        }
+
+        // Mouse drag scrolling support
+        let isDown = false;
+        let startX;
+        let scrollLeftPos;
+
+        strip.addEventListener('mousedown', function(e) {
+            isDown = true;
+            strip.style.cursor = 'grabbing';
+            startX = e.pageX - strip.offsetLeft;
+            scrollLeftPos = strip.scrollLeft;
+        });
+
+        strip.addEventListener('mouseleave', function() {
+            isDown = false;
+            strip.style.cursor = '';
+        });
+
+        strip.addEventListener('mouseup', function() {
+            isDown = false;
+            strip.style.cursor = '';
+        });
+
+        strip.addEventListener('mousemove', function(e) {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - strip.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            strip.scrollLeft = scrollLeftPos - walk;
+        });
+
+        updateNavState();
+        window.addEventListener('resize', updateNavState);
+    }
+
+    // ── Search Clear Button ─────────────────────────────────────────
+    const searchInput = document.getElementById('menuSearchInput');
+    const clearBtn = document.getElementById('searchClearBtn');
+    const filterForm = document.getElementById('menuFilterForm');
+
+    if (clearBtn && searchInput && filterForm) {
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            filterForm.submit();
+        });
+    }
+});
+</script>
 
 <?php include dirname(__DIR__, 2) . '/includes/footer.php'; ?>
