@@ -457,18 +457,18 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
         <div class="form-row">
             <div class="form-group">
                 <label for="new_full_name" class="form-label">Full Name</label>
-                <input type="text" id="new_full_name" name="new_full_name" class="form-control" placeholder="e.g. Kasun Fernando" required>
+                <input type="text" id="new_full_name" name="new_full_name" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="new_username" class="form-label">Username</label>
-                <input type="text" id="new_username" name="new_username" class="form-control" placeholder="e.g. kasun_chef" required>
+                <input type="text" id="new_username" name="new_username" class="form-control" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group">
                 <label for="new_email" class="form-label">Email Address</label>
-                <input type="email" id="new_email" name="new_email" class="form-control" placeholder="staff@urbaneats.lk" required>
+                <input type="email" id="new_email" name="new_email" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="new_role_id" class="form-label">Assign Role</label>
@@ -484,7 +484,19 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 
         <div class="form-group">
             <label for="new_password" class="form-label">Initial Password</label>
-            <input type="password" id="new_password" name="new_password" class="form-control" placeholder="Min 8 chars with uppercase, lowercase, number, symbol" required>
+            <div class="password-input-wrapper">
+                <input type="password" id="new_password" name="new_password" class="form-control" required>
+                <button type="button" class="password-toggle-btn" aria-label="Show password" title="Show password" tabindex="-1">
+                    <svg class="eye-icon eye-show" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <svg class="eye-icon eye-hide" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>
+                </button>
+            </div>
             <div class="form-text">Must satisfy the platform password strength policy.</div>
         </div>
 

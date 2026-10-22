@@ -122,22 +122,17 @@ include dirname(__DIR__, 2) . '/includes/header.php';
             <div style="display: flex; align-items: center; gap: 1rem; margin-top: auto; flex-wrap: wrap;">
                 <?php if ($isOutOfStock): ?>
                     <button type="button" class="btn btn-outline" disabled style="opacity: 0.6; cursor: not-allowed;">
-                        ❌ Currently Sold Out
+                        Currently Sold Out
                     </button>
                 <?php else: ?>
                     <a href="<?= base_url('orders/cart.php?add=' . (int)$dish['dish_id']) ?>" class="btn btn-primary btn-lg">
-                        🛒 Add to Order (Component C)
+                       Add to Cart
                     </a>
                 <?php endif; ?>
 
                 <a href="<?= base_url('menu/index.php') ?>" class="btn btn-outline btn-lg">
-                    &larr; Back to Catalogue
+                      Back to Catalogue
                 </a>
-            </div>
-
-            <!-- Component C Integration Callout -->
-            <div style="margin-top: 2rem; padding: 0.75rem 1rem; border-left: 3px solid var(--primary); background: var(--primary-light); border-radius: 4px; font-size: 0.8125rem; color: var(--primary-active);">
-                <strong>Component Integration Note:</strong> Ordering, cart management, and payment are governed by Component C. Inventory deductions are executed via <code>reduce_stock()</code>.
             </div>
         </div>
 

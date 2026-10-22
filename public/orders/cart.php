@@ -126,7 +126,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
             <?= csrf_field() ?>
             <input type="hidden" name="action" value="clear">
             <button type="submit" class="btn btn-outline btn-sm" style="color: var(--c-danger); border-color: #FECACA;">
-                🗑️ Clear All
+                Clear All
             </button>
         </form>
     <?php endif; ?>

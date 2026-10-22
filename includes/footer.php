@@ -61,6 +61,36 @@ declare(strict_types=1);
                 }
             });
         }
+
+        // Global Password Visibility Toggle
+        document.addEventListener('click', function (e) {
+            const toggleBtn = e.target.closest('.password-toggle-btn');
+            if (!toggleBtn) return;
+
+            const wrapper = toggleBtn.closest('.password-input-wrapper');
+            if (!wrapper) return;
+
+            const passwordInput = wrapper.querySelector('input');
+            if (!passwordInput) return;
+
+            const isPassword = passwordInput.getAttribute('type') === 'password';
+            passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+
+            const showIcon = toggleBtn.querySelector('.eye-show');
+            const hideIcon = toggleBtn.querySelector('.eye-hide');
+
+            if (isPassword) {
+                toggleBtn.setAttribute('aria-label', 'Hide password');
+                toggleBtn.setAttribute('title', 'Hide password');
+                if (showIcon) showIcon.style.display = 'none';
+                if (hideIcon) hideIcon.style.display = 'block';
+            } else {
+                toggleBtn.setAttribute('aria-label', 'Show password');
+                toggleBtn.setAttribute('title', 'Show password');
+                if (showIcon) showIcon.style.display = 'block';
+                if (hideIcon) hideIcon.style.display = 'none';
+            }
+        });
     });
 </script>
 </body>

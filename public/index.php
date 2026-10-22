@@ -30,7 +30,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
             <?php if (!is_logged_in()): ?>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
                     <a href="<?= base_url('menu/index.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
-                        🍽️ Browse Menu Catalogue &rarr;
+                        Browse Menu Catalogue
                     </a>
                     <a href="<?= base_url('auth/register.php') ?>" class="btn btn-outline" style="padding: 0.9rem 2rem; font-size: 1rem;">
                         Create Free Account
@@ -40,7 +40,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
                     <?php if (current_user_role() === 'kitchen_staff'): ?>
                         <a href="<?= base_url('menu/stock.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
-                            📊 Stock Dashboard &rarr;
+                            📊 Stock Dashboard
                         </a>
                         <a href="<?= base_url('menu/manage.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
                             Manage Dishes
@@ -50,7 +50,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                         </a>
                     <?php elseif (current_user_role() === 'admin'): ?>
                         <a href="<?= base_url('admin/index.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
-                            Open Admin Dashboard &rarr;
+                            Open Admin Dashboard
                         </a>
                         <a href="<?= base_url('menu/stock.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
                             Stock Dashboard
@@ -60,7 +60,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
                         </a>
                     <?php else: ?>
                         <a href="<?= base_url('menu/index.php') ?>" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1rem;">
-                            🍽️ Browse Menu Catalogue &rarr;
+                            🍽️ Browse Menu Catalogue
                         </a>
                         <a href="<?= base_url('auth/profile.php') ?>" class="btn btn-outline" style="padding: 0.9rem 1.75rem; font-size: 1rem;">
                             View My Profile
@@ -205,7 +205,7 @@ require_once dirname(__DIR__) . '/includes/header.php';
 
                 <div>
                     <a href="<?= base_url('auth/register.php') ?>" class="btn btn-primary">
-                        Get Started with UrbanEats &rarr;
+                        Get Started with UrbanEats
                     </a>
                 </div>
             </div>
