@@ -12,7 +12,30 @@ declare(strict_types=1);
 require_once dirname(__DIR__, 2) . '/includes/bootstrap.php';
 require_once dirname(__DIR__, 2) . '/includes/component_c.php';
 
-// Handle POST actions for Cart Mutations
+// 1. Handle GET query parameters for adding dishes
+// Supports direct integration from Component B menu/detail.php (<a href="orders/cart.php?add=ID">)
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $dishId = 0;
+    if (!empty($_GET['add'])) {
+        $dishId = (int)$_GET['add'];
+    } elseif (isset($_GET['action']) && $_GET['action'] === 'add' && !empty($_GET['dish_id'])) {
+        $dishId = (int)$_GET['dish_id'];
+    }
+
+    if ($dishId > 0) {
+        $qty = max(1, (int)($_GET['qty'] ?? $_GET['quantity'] ?? 1));
+        $result = cart_add($dishId, $qty);
+        if ($result['success']) {
+            flash('success', $result['message']);
+        } else {
+            flash('danger', $result['message']);
+        }
+        // Redirect cleanly so page refresh does not re-add the item
+        redirect('orders/cart.php');
+    }
+}
+
+// 2. Handle POST actions for Cart Mutations (CSRF protected)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_csrf();
 
@@ -71,6 +94,20 @@ $subtotal = $cartDetails['subtotal'];
 $totalCount = $cartDetails['count'];
 $hasUnavailable = $cartDetails['has_unavailable'];
 
+// Fetch quick-add popular dishes from menu
+$pdo = get_db_connection();
+$stmtPopular = $pdo->query(
+    'SELECT d.dish_id, d.name, d.price, d.image_path, c.name AS category_name,
+            COALESCE(i.qty_available, 0) AS qty_available
+     FROM dishes d
+     JOIN categories c ON d.category_id = c.category_id
+     LEFT JOIN inventory i ON d.dish_id = i.dish_id
+     WHERE d.is_active = 1 AND COALESCE(i.qty_available, 0) > 0
+     ORDER BY d.dish_id ASC
+     LIMIT 4'
+);
+$popularDishes = $stmtPopular->fetchAll();
+
 $pageTitle = 'Your Shopping Cart';
 $extraHead = '<link rel="stylesheet" href="' . base_url('css/component-c.css') . '">';
 
@@ -103,9 +140,48 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
             Explore our chef-crafted menu featuring authentic Sri Lankan curries, signature kottu, biryanis, and quick bites.
         </p>
         <a href="<?= base_url('menu/index.php') ?>" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">
-            Explore Our Menu
+            Explore Entire Menu
         </a>
     </div>
+
+    <!-- Quick Add Popular Dishes Section -->
+    <?php if (!empty($popularDishes)): ?>
+        <div style="margin-top: 2.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--c-charcoal); margin: 0;">
+                    🔥 Quick Add Popular Dishes
+                </h3>
+                <a href="<?= base_url('menu/index.php') ?>" style="font-size: 0.85rem; color: var(--c-primary); font-weight: 600; text-decoration: none;">
+                    View All Dishes →
+                </a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
+                <?php foreach ($popularDishes as $pDish): ?>
+                    <div class="c-card" style="margin-bottom: 0; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <span style="font-size: 0.75rem; color: var(--c-muted); text-transform: uppercase; font-weight: 600;"><?= e($pDish['category_name']) ?></span>
+                            <h4 style="margin: 0.35rem 0 0.5rem 0; font-size: 1.05rem; color: var(--c-charcoal);"><?= e($pDish['name']) ?></h4>
+                            <div style="font-weight: 700; color: var(--c-primary); font-size: 1.1rem; margin-bottom: 1rem;">
+                                <?= format_lkr($pDish['price']) ?>
+                            </div>
+                        </div>
+
+                        <form action="<?= base_url('orders/cart.php') ?>" method="POST">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="action" value="add">
+                            <input type="hidden" name="dish_id" value="<?= (int)$pDish['dish_id'] ?>">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="c-btn-block c-btn-primary" style="padding: 0.55rem 1rem; font-size: 0.9rem;">
+                                + Add to Cart
+                            </button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
 <?php else: ?>
 
     <?php if ($hasUnavailable): ?>
