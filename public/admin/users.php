@@ -270,6 +270,7 @@ $users = $userListStmt->fetchAll();
 
 $pageTitle = 'User Management';
 require_once dirname(__DIR__, 2) . '/includes/header.php';
+require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 ?>
 
 <div class="page-header">
