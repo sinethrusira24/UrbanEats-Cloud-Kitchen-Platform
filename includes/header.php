@@ -12,6 +12,11 @@ require_once __DIR__ . '/bootstrap.php';
 $pageTitle = isset($pageTitle) ? e($pageTitle) . ' — UrbanEats' : 'UrbanEats — Cloud Kitchen Platform';
 $currentUser = current_user();
 $currentRole = current_user_role();
+$currentScript = $_SERVER['SCRIPT_NAME'] ?? '';
+$isHome = str_ends_with($currentScript, 'index.php') && !str_contains($currentScript, '/admin/') && !str_contains($currentScript, '/menu/');
+$isMenu = str_contains($currentScript, '/menu/index.php') || str_contains($currentScript, '/menu/detail.php');
+$isAdmin = str_contains($currentScript, '/admin/');
+$isKitchen = str_contains($currentScript, '/menu/manage.php') || str_contains($currentScript, '/menu/stock.php') || str_contains($currentScript, '/menu/categories.php') || str_contains($currentScript, '/menu/dish-form.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,42 +47,70 @@ $currentRole = current_user_role();
         <div class="header-right">
             <nav>
                 <ul class="nav-links" id="mainNav">
-                    <li><a href="<?= base_url('index.php') ?>" class="nav-link">Home</a></li>
-                    <li><a href="<?= base_url('menu/index.php') ?>" class="nav-link">Menu</a></li>
+                    <li><a href="<?= base_url('index.php') ?>" class="nav-link <?= $isHome ? 'active' : '' ?>">Home</a></li>
+                    <li><a href="<?= base_url('menu/index.php') ?>" class="nav-link <?= $isMenu ? 'active' : '' ?>">Menu</a></li>
 
                     <?php if (is_logged_in()): ?>
-                        <?php if ($currentRole === 'kitchen_staff' || $currentRole === 'admin'): ?>
-                            <li><a href="<?= base_url('menu/manage.php') ?>" class="nav-link">Dishes</a></li>
-                            <li><a href="<?= base_url('menu/stock.php') ?>" class="nav-link">Stock</a></li>
-                            <li><a href="<?= base_url('menu/categories.php') ?>" class="nav-link">Categories</a></li>
+                        <?php if ($currentRole === 'kitchen_staff'): ?>
+                            <li><a href="<?= base_url('menu/manage.php') ?>" class="nav-link <?= str_contains($currentScript, 'menu/manage.php') ? 'active' : '' ?>">Dishes</a></li>
+                            <li><a href="<?= base_url('menu/stock.php') ?>" class="nav-link <?= str_contains($currentScript, 'menu/stock.php') ? 'active' : '' ?>">Stock</a></li>
+                            <li><a href="<?= base_url('menu/categories.php') ?>" class="nav-link <?= str_contains($currentScript, 'menu/categories.php') ? 'active' : '' ?>">Categories</a></li>
                         <?php endif; ?>
 
                         <?php if ($currentRole === 'admin'): ?>
-                            <li><a href="<?= base_url('admin/index.php') ?>" class="nav-link">Dashboard</a></li>
-                            <li><a href="<?= base_url('admin/users.php') ?>" class="nav-link">User Management</a></li>
-                            <li><a href="<?= base_url('admin/audit-log.php') ?>" class="nav-link">Audit Logs</a></li>
+                            <!-- Admin Structured Navigation Dropdown -->
+                            <li class="nav-item-dropdown">
+                                <a href="<?= base_url('admin/index.php') ?>" class="nav-link nav-dropdown-toggle <?= ($isAdmin || $isKitchen) ? 'active' : '' ?>">
+                                    <span>🛡️ Administration</span>
+                                    <span class="nav-caret">▾</span>
+                                </a>
+                                <ul class="nav-dropdown-menu">
+                                    <li><a href="<?= base_url('admin/index.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'admin/index.php') ? 'active' : '' ?>">📊 Dashboard Overview</a></li>
+                                    <li><a href="<?= base_url('admin/users.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'admin/users.php') ? 'active' : '' ?>">👥 User Management</a></li>
+                                    <li><a href="<?= base_url('admin/audit-log.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'admin/audit-log.php') ? 'active' : '' ?>">📜 Security Audit Logs</a></li>
+                                    <li class="dropdown-divider-nav"></li>
+                                    <li><a href="<?= base_url('menu/manage.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'menu/manage.php') ? 'active' : '' ?>">🍽️ Menu Dishes</a></li>
+                                    <li><a href="<?= base_url('menu/stock.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'menu/stock.php') ? 'active' : '' ?>">📦 Inventory & Stock</a></li>
+                                    <li><a href="<?= base_url('menu/categories.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'menu/categories.php') ? 'active' : '' ?>">🏷️ Categories</a></li>
+                                </ul>
+                            </li>
                         <?php endif; ?>
 
-                        <li><a href="<?= base_url('auth/profile.php') ?>" class="nav-link">My Profile</a></li>
-                        <li><a href="<?= base_url('auth/change-password.php') ?>" class="nav-link">Security</a></li>
+                        <li class="mobile-only-link"><a href="<?= base_url('auth/profile.php') ?>" class="nav-link <?= str_contains($currentScript, 'auth/profile.php') ? 'active' : '' ?>">My Profile</a></li>
+                        <li class="mobile-only-link"><a href="<?= base_url('auth/change-password.php') ?>" class="nav-link <?= str_contains($currentScript, 'auth/change-password.php') ? 'active' : '' ?>">Security</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
 
             <div class="nav-actions">
                 <?php if (is_logged_in() && $currentUser): ?>
-                    <div class="user-badge-nav">
-                        <span class="user-name"><?= e($currentUser['username']) ?></span>
-                        <span class="badge badge-<?= e($currentRole) ?>"><?= e(str_replace('_', ' ', (string)$currentRole)) ?></span>
-                    </div>
-
-                    <!-- Secure POST-based Logout form with CSRF protection -->
-                    <form action="<?= base_url('auth/logout.php') ?>" method="POST" style="display:inline; margin:0;">
-                        <?= csrf_field() ?>
-                        <button type="submit" class="btn btn-outline btn-sm" title="Sign out of your account">
-                            Sign Out
+                    <div class="user-profile-menu">
+                        <button type="button" class="user-badge-nav user-dropdown-btn" id="userMenuBtn" aria-haspopup="true" aria-expanded="false" title="Account settings">
+                            <span class="user-name"><?= e($currentUser['username']) ?></span>
+                            <span class="badge badge-<?= e($currentRole) ?>"><?= e(str_replace('_', ' ', (string)$currentRole)) ?></span>
+                            <span class="dropdown-caret">▾</span>
                         </button>
-                    </form>
+                        <div class="user-dropdown-dropdown" id="userDropdownContent">
+                            <div class="user-dropdown-header">
+                                <span class="user-dropdown-fullname"><?= e($currentUser['full_name'] ?? $currentUser['username']) ?></span>
+                                <span class="user-dropdown-email"><?= e($currentUser['email'] ?? '') ?></span>
+                            </div>
+                            <div class="dropdown-divider-nav"></div>
+                            <a href="<?= base_url('auth/profile.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'auth/profile.php') ? 'active' : '' ?>">
+                                👤 My Profile
+                            </a>
+                            <a href="<?= base_url('auth/change-password.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'auth/change-password.php') ? 'active' : '' ?>">
+                                🔐 Security & Password
+                            </a>
+                            <div class="dropdown-divider-nav"></div>
+                            <form action="<?= base_url('auth/logout.php') ?>" method="POST" class="user-dropdown-logout-form">
+                                <?= csrf_field() ?>
+                                <button type="submit" class="dropdown-link dropdown-link-danger">
+                                    🚪 Sign Out
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 <?php else: ?>
                     <a href="<?= base_url('auth/login.php') ?>" class="btn btn-outline btn-sm">Sign In</a>
                     <a href="<?= base_url('auth/register.php') ?>" class="btn btn-primary btn-sm">Create Account</a>
