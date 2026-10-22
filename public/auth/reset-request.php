@@ -135,7 +135,6 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
                        id="identifier"
                        name="identifier"
                        class="form-control"
-                       placeholder="e.g. sachini_k or sachini@gmail.com"
                        value="<?= e($identifier) ?>"
                        required
                        autofocus>

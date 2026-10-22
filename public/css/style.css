@@ -22,11 +22,11 @@
   --primary-shadow: 0 4px 14px rgba(5, 150, 105, 0.28);
 
   /* Backgrounds & Neutrals */
-  --bg-main: #f1f5f9;          /* Sophisticated Cool Slate (Subtly darker for crisp card contrast) */
+  --bg-main: #ecf7f0;          /* Fresh Culinary Light Green */
   --bg-card: #ffffff;          /* Pure Crisp White */
-  --bg-card-hover: #f8fafc;
+  --bg-card-hover: #f4faf6;
   --bg-input: #ffffff;
-  --bg-subtle: #e2e8f0;
+  --bg-subtle: #dceee3;
 
   /* Typography / Text Colors */
   --text-main: #0f172a;        /* Deep Slate 900 (High contrast) */
@@ -36,7 +36,7 @@
 
   /* Borders */
   --border-color: #e2e8f0;     /* Slate 200 */
-  --border-light: #f1f5f9;
+  --border-light: #e4f2ea;
   --border-focus: #059669;
 
   /* Status Colors */
@@ -225,7 +225,7 @@ img {
   align-items: center;
   gap: 0.65rem;
   padding: 0.35rem 0.85rem;
-  background: #f1f5f9;
+  background: var(--bg-main);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-full);
   font-size: 0.85rem;
@@ -239,7 +239,7 @@ img {
 
 .mobile-nav-toggle {
   display: none;
-  background: #f1f5f9;
+  background: var(--bg-main);
   border: 1px solid var(--border-color);
   color: var(--text-main);
   font-size: 1.25rem;
@@ -1054,6 +1054,59 @@ h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
 
 .form-control::placeholder {
   color: #9ca3af;
+}
+
+/* Hide native Edge/IE password toggle to prevent duplicate icon */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+/* Password Visibility Toggle Wrapper and Button */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-wrapper .form-control {
+  padding-right: 2.75rem;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0.35rem;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s ease, background-color 0.15s ease;
+  line-height: 1;
+  z-index: 2;
+}
+
+.password-toggle-btn:hover {
+  color: var(--primary);
+  background-color: rgba(5, 150, 105, 0.08);
+}
+
+.password-toggle-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.password-toggle-btn svg {
+  display: block;
+  pointer-events: none;
 }
 
 .form-control:focus {

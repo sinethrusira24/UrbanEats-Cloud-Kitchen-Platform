@@ -88,51 +88,124 @@ $extraHead = '<link rel="stylesheet" href="' . base_url('css/component-b.css') .
 include dirname(__DIR__, 2) . '/includes/header.php';
 ?>
 
-    <!-- Menu Catalogue Header -->
-    <div class="menu-catalogue-header">
-        <!-- Decorative Background Watermark Accents -->
-        <svg class="header-bg-accent header-bg-accent-left" width="160" height="160" viewBox="0 0 160 160" fill="none" aria-hidden="true">
-            <circle cx="80" cy="80" r="68" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 6"/>
-            <circle cx="80" cy="80" r="42" stroke="currentColor" stroke-width="1"/>
-            <circle cx="80" cy="80" r="16" stroke="currentColor" stroke-width="0.8"/>
-            <path d="M80 6v148M6 80h148" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2 4"/>
-        </svg>
-        <svg class="header-bg-accent header-bg-accent-right" width="160" height="160" viewBox="0 0 160 160" fill="none" aria-hidden="true">
-            <path d="M50 102c0-26 13.4-42 30-42s30 16 30 42H50z" stroke="currentColor" stroke-width="1.3"/>
-            <line x1="42" y1="108" x2="118" y2="108" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            <circle cx="80" cy="54" r="4" stroke="currentColor" stroke-width="1.2"/>
-            <path d="M125 45l3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8z" fill="currentColor"/>
-            <path d="M35 120l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z" fill="currentColor"/>
-        </svg>
+    <!-- Sleek Moving Spotlight Banner (Compact Game-Launcher / App-Card Reference Style) -->
+    <div class="spotlight-card-banner" id="spotlightBanner" aria-label="Featured Cloud Kitchen Specials">
+        <div class="spotlight-slides-track">
+            <!-- Slide 0: Chicken Biryani -->
+            <div class="spotlight-slide active" data-slide="0">
+                <img src="<?= base_url('images/biryani.jpg') ?>" alt="Urban Royal Chicken Biryani" class="spotlight-img">
+                <div class="spotlight-bg-overlay"></div>
+                <div class="spotlight-content">
+                    <div class="spotlight-brand">
+                        <span class="spotlight-brand-logo">URBAN<span class="brand-highlight">EATS</span></span>
+                        <span class="spotlight-brand-tag">SIGNATURE</span>
+                    </div>
+                    <span class="spotlight-badge">NEW CHEF CREATION</span>
+                    <h2 class="spotlight-title">Urban Royal Chicken Biryani</h2>
+                    <div class="spotlight-meta">
+                        <span class="spotlight-price">Rs. 1,650.00</span>
+                        <span class="spotlight-bullet">•</span>
+                        <span class="spotlight-perk">Free Express Delivery</span>
+                    </div>
+                    <div class="spotlight-actions">
+                        <a href="<?= base_url('menu/detail.php?id=1') ?>" class="spotlight-btn-primary">Order Now</a>
+                        <button type="button" class="spotlight-btn-icon" data-dish-id="1" aria-label="Bookmark dish" title="Bookmark dish">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-        <div class="header-content-inner">
-            <div class="header-live-badge">
-                <span class="pulse-indicator">
-                    <span class="pulse-ring"></span>
-                    <span class="pulse-dot"></span>
-                </span>
-                Freshly Prepared Everyday
+            <!-- Slide 1: Cheese Kottu -->
+            <div class="spotlight-slide" data-slide="1">
+                <img src="<?= base_url('images/cheese_kottu.jpg') ?>" alt="Spicy Roast Chicken Cheese Kottu" class="spotlight-img">
+                <div class="spotlight-bg-overlay"></div>
+                <div class="spotlight-content">
+                    <div class="spotlight-brand">
+                        <span class="spotlight-brand-logo">URBAN<span class="brand-highlight">EATS</span></span>
+                        <span class="spotlight-brand-tag">HOT PICKS</span>
+                    </div>
+                    <span class="spotlight-badge">TOP BESTSELLER</span>
+                    <h2 class="spotlight-title">Spicy Roast Chicken Cheese Kottu</h2>
+                    <div class="spotlight-meta">
+                        <span class="spotlight-price">Rs. 1,450.00</span>
+                        <span class="spotlight-bullet">•</span>
+                        <span class="spotlight-perk">Sizzling & Melted Cheese</span>
+                    </div>
+                    <div class="spotlight-actions">
+                        <a href="<?= base_url('menu/detail.php?id=2') ?>" class="spotlight-btn-primary">Order Now</a>
+                        <button type="button" class="spotlight-btn-icon" data-dish-id="2" aria-label="Bookmark dish" title="Bookmark dish">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <h1 class="header-title">Cloud Kitchen <span class="text-gradient">Catalogue</span></h1>
-            <p class="header-desc">
-                Explore our curated culinary creations crafted fresh in our Colombo cloud kitchens. Fast delivery guaranteed.
-            </p>
-            <div class="header-highlights">
-                <span class="highlight-item">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                    30–45m Express Delivery
-                </span>
-                <span class="highlight-divider">•</span>
-                <span class="highlight-item">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    100% Fresh & Authentic
-                </span>
-                <span class="highlight-divider">•</span>
-                <span class="highlight-item">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"></path><line x1="6" y1="17" x2="18" y2="17"></line></svg>
-                    Chef Handcrafted
-                </span>
+
+            <!-- Slide 2: Kochchi Chicken Burger -->
+            <div class="spotlight-slide" data-slide="2">
+                <img src="<?= base_url('images/chicken_burger.jpg') ?>" alt="Crispy Kochchi Chicken Burger" class="spotlight-img">
+                <div class="spotlight-bg-overlay"></div>
+                <div class="spotlight-content">
+                    <div class="spotlight-brand">
+                        <span class="spotlight-brand-logo">URBAN<span class="brand-highlight">EATS</span></span>
+                        <span class="spotlight-brand-tag">CRUNCH</span>
+                    </div>
+                    <span class="spotlight-badge">FIERY KOCHCHI SPECIAL</span>
+                    <h2 class="spotlight-title">Crispy Kochchi Chicken Burger</h2>
+                    <div class="spotlight-meta">
+                        <span class="spotlight-price">Rs. 1,250.00</span>
+                        <span class="spotlight-bullet">•</span>
+                        <span class="spotlight-perk">Freshly Fried & Juicy</span>
+                    </div>
+                    <div class="spotlight-actions">
+                        <a href="<?= base_url('menu/detail.php?id=7') ?>" class="spotlight-btn-primary">Order Now</a>
+                        <button type="button" class="spotlight-btn-icon" data-dish-id="7" aria-label="Bookmark dish" title="Bookmark dish">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </button>
+                    </div>
+                </div>
             </div>
+
+            <!-- Slide 3: Teriyaki Chicken Bowl -->
+            <div class="spotlight-slide" data-slide="3">
+                <img src="<?= base_url('images/hero_dish.jpg') ?>" alt="Artisanal Teriyaki Chicken Bowl" class="spotlight-img">
+                <div class="spotlight-bg-overlay"></div>
+                <div class="spotlight-content">
+                    <div class="spotlight-brand">
+                        <span class="spotlight-brand-logo">URBAN<span class="brand-highlight">EATS</span></span>
+                        <span class="spotlight-brand-tag">HEALTHY</span>
+                    </div>
+                    <span class="spotlight-badge">GARDEN FRESH BOWL</span>
+                    <h2 class="spotlight-title">Artisanal Teriyaki Chicken Bowl</h2>
+                    <div class="spotlight-meta">
+                        <span class="spotlight-price">Rs. 1,600.00</span>
+                        <span class="spotlight-bullet">•</span>
+                        <span class="spotlight-perk">Nutrient Packed & Glazed</span>
+                    </div>
+                    <div class="spotlight-actions">
+                        <a href="<?= base_url('menu/detail.php?id=20') ?>" class="spotlight-btn-primary">Order Now</a>
+                        <button type="button" class="spotlight-btn-icon" data-dish-id="20" aria-label="Bookmark dish" title="Bookmark dish">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleek Carousel Navigation Controls (Floating Bottom-Right Pill) -->
+        <div class="spotlight-nav-controls">
+            <button type="button" class="spotlight-arrow" id="spotlightPrev" aria-label="Previous Featured Dish">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="spotlight-indicators" id="spotlightIndicators">
+                <button type="button" class="spotlight-dash active" data-index="0" aria-label="Dish 1"></button>
+                <button type="button" class="spotlight-dash" data-index="1" aria-label="Dish 2"></button>
+                <button type="button" class="spotlight-dash" data-index="2" aria-label="Dish 3"></button>
+                <button type="button" class="spotlight-dash" data-index="3" aria-label="Dish 4"></button>
+            </div>
+            <button type="button" class="spotlight-arrow" id="spotlightNext" aria-label="Next Featured Dish">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
         </div>
     </div>
 
@@ -524,6 +597,127 @@ document.addEventListener('DOMContentLoaded', function() {
             searchInput.value = '';
             filterForm.submit();
         });
+    }
+
+    // ── Sleek Spotlight Banner Controller (Autoplay, Transitions, Swipe, Bookmarking) ──
+    const spotlightBanner = document.getElementById('spotlightBanner');
+    const spotlightSlides = document.querySelectorAll('.spotlight-slide');
+    const spotlightDashes = document.querySelectorAll('.spotlight-dash');
+    const spotlightPrevBtn = document.getElementById('spotlightPrev');
+    const spotlightNextBtn = document.getElementById('spotlightNext');
+
+    if (spotlightSlides.length > 0) {
+        let currentSlide = 0;
+        let slideInterval = null;
+        const totalSlides = spotlightSlides.length;
+
+        function goToSlide(index) {
+            currentSlide = (index + totalSlides) % totalSlides;
+
+            spotlightSlides.forEach((slide, idx) => {
+                if (idx === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            spotlightDashes.forEach((dash, idx) => {
+                if (idx === currentSlide) {
+                    dash.classList.add('active');
+                } else {
+                    dash.classList.remove('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        function startAutoplay() {
+            if (!slideInterval) {
+                slideInterval = setInterval(nextSlide, 4500);
+            }
+        }
+
+        function pauseAutoplay() {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
+        }
+
+        if (spotlightNextBtn) {
+            spotlightNextBtn.addEventListener('click', () => {
+                nextSlide();
+                pauseAutoplay();
+                startAutoplay();
+            });
+        }
+
+        if (spotlightPrevBtn) {
+            spotlightPrevBtn.addEventListener('click', () => {
+                prevSlide();
+                pauseAutoplay();
+                startAutoplay();
+            });
+        }
+
+        spotlightDashes.forEach((dash) => {
+            dash.addEventListener('click', function() {
+                const idx = parseInt(this.getAttribute('data-index'), 10);
+                goToSlide(idx);
+                pauseAutoplay();
+                startAutoplay();
+            });
+        });
+
+        // Hover pause
+        if (spotlightBanner) {
+            spotlightBanner.addEventListener('mouseenter', pauseAutoplay);
+            spotlightBanner.addEventListener('mouseleave', startAutoplay);
+
+            // Touch swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            spotlightBanner.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                pauseAutoplay();
+            }, { passive: true });
+
+            spotlightBanner.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 45) {
+                    nextSlide();
+                } else if (touchEndX - touchStartX > 45) {
+                    prevSlide();
+                }
+                startAutoplay();
+            }, { passive: true });
+        }
+
+        // Bookmark button toggle
+        document.querySelectorAll('.spotlight-btn-icon').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.classList.toggle('bookmarked');
+                const svg = this.querySelector('svg');
+                if (this.classList.contains('bookmarked')) {
+                    svg.setAttribute('fill', 'currentColor');
+                } else {
+                    svg.setAttribute('fill', 'none');
+                }
+            });
+        });
+
+        // Start autoplay
+        startAutoplay();
     }
 });
 </script>
