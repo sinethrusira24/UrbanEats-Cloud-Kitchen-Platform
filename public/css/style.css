@@ -1169,14 +1169,16 @@ select.form-control {
   box-shadow: var(--shadow-card);
 }
 
-.table {
+.table,
+.data-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
   font-size: 0.925rem;
 }
 
-.table th {
+.table th,
+.data-table th {
   background-color: #f8fafc;
   color: var(--text-muted);
   font-weight: 700;
@@ -1187,18 +1189,21 @@ select.form-control {
   border-bottom: 1px solid var(--border-color);
 }
 
-.table td {
+.table td,
+.data-table td {
   padding: 1rem 1.15rem;
   border-bottom: 1px solid var(--border-light);
   color: var(--text-main);
   vertical-align: middle;
 }
 
-.table tr:last-child td {
+.table tr:last-child td,
+.data-table tr:last-child td {
   border-bottom: none;
 }
 
-.table tr:hover td {
+.table tr:hover td,
+.data-table tr:hover td {
   background-color: #f8fafc;
 }
 

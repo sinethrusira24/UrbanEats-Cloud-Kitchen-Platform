@@ -135,7 +135,7 @@ $extraHead = '<link rel="stylesheet" href="' . base_url('css/component-b.css') .
 include dirname(__DIR__, 2) . '/includes/header.php';
 ?>
 
-<div class="container" style="padding: 1.5rem 0 3.5rem;">
+<div style="padding: 1rem 0 3.5rem;">
 
     <!-- Dashboard Title Bar -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
