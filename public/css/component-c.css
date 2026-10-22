@@ -1,0 +1,777 @@
+/**
+ * UrbanEats Cloud Kitchen Platform
+ * Component C: Ordering, Payment and Tracking
+ * Dedicated Modern Stylesheet
+ */
+
+:root {
+  --c-primary: #22A447;
+  --c-primary-dark: #167A35;
+  --c-primary-light: #E8F5E9;
+  --c-charcoal: #17211B;
+  --c-surface: #FFFFFF;
+  --c-background: #F7FAF7;
+  --c-text: #202B24;
+  --c-muted: #69756D;
+  --c-border: #E2E9E3;
+  --c-border-hover: #B8D1BE;
+  --c-success: #16A34A;
+  --c-warning: #D97706;
+  --c-danger: #DC2626;
+  --c-info: #2563EB;
+  --c-radius: 12px;
+  --c-radius-sm: 8px;
+  --c-radius-lg: 16px;
+  --c-shadow: 0 4px 16px rgba(23, 33, 27, 0.06);
+  --c-shadow-hover: 0 8px 24px rgba(34, 164, 71, 0.12);
+  --c-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -------------------------------------------------------------------------- */
+/* General Layout & Page Headers                                              */
+/* -------------------------------------------------------------------------- */
+.c-page-header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.c-page-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--c-charcoal);
+  margin: 0 0 0.35rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.c-page-subtitle {
+  color: var(--c-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.c-two-column {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .c-two-column {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Cards & Containers                                                         */
+/* -------------------------------------------------------------------------- */
+.c-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius);
+  box-shadow: var(--c-shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: var(--c-transition);
+}
+
+.c-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.c-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--c-charcoal);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Shopping Cart Styles                                                       */
+/* -------------------------------------------------------------------------- */
+.c-cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.c-cart-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  background: #F9FAF9;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--c-muted);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.c-cart-item {
+  border-bottom: 1px solid var(--c-border);
+  transition: background 0.15s ease;
+}
+
+.c-cart-item:hover {
+  background: #FAFDFB;
+}
+
+.c-cart-item td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.c-cart-dish-cell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.c-cart-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--c-radius-sm);
+  object-fit: cover;
+  background: #EEE;
+  border: 1px solid var(--c-border);
+  flex-shrink: 0;
+}
+
+.c-cart-dish-meta h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  color: var(--c-charcoal);
+}
+
+.c-cart-dish-meta .category {
+  font-size: 0.8rem;
+  color: var(--c-muted);
+}
+
+.c-qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius-sm);
+  overflow: hidden;
+  background: #FFF;
+}
+
+.c-qty-btn {
+  background: #F3F6F4;
+  border: none;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--c-charcoal);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.c-qty-btn:hover:not(:disabled) {
+  background: #E2E9E3;
+}
+
+.c-qty-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.c-qty-input {
+  width: 44px;
+  height: 32px;
+  border: none;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--c-charcoal);
+  padding: 0;
+  outline: none;
+}
+
+.c-remove-btn {
+  background: none;
+  border: none;
+  color: #9CA3AF;
+  cursor: pointer;
+  padding: 0.35rem;
+  border-radius: 4px;
+  transition: var(--c-transition);
+}
+
+.c-remove-btn:hover {
+  color: var(--c-danger);
+  background: #FEE2E2;
+}
+
+.c-cart-empty-state {
+  text-align: center;
+  padding: 4rem 1.5rem;
+}
+
+.c-cart-empty-icon {
+  font-size: 4rem;
+  color: var(--c-muted);
+  margin-bottom: 1rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Summary Card & Pricing                                                     */
+/* -------------------------------------------------------------------------- */
+.c-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  font-size: 0.95rem;
+  color: var(--c-muted);
+}
+
+.c-summary-row.total {
+  border-top: 2px dashed var(--c-border);
+  margin-top: 0.75rem;
+  padding-top: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--c-charcoal);
+}
+
+.c-summary-row.discount {
+  color: var(--c-primary);
+  font-weight: 600;
+}
+
+.c-btn-block {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.85rem 1.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: var(--c-radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: var(--c-transition);
+}
+
+.c-btn-primary {
+  background: var(--c-primary);
+  color: #FFF;
+}
+
+.c-btn-primary:hover {
+  background: var(--c-primary-dark);
+  color: #FFF;
+  box-shadow: 0 4px 12px rgba(34, 164, 71, 0.3);
+}
+
+.c-btn-outline {
+  background: transparent;
+  color: var(--c-charcoal);
+  border: 1px solid var(--c-border);
+}
+
+.c-btn-outline:hover {
+  background: #F4F7F4;
+  border-color: var(--c-border-hover);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Checkout Form & Selectors                                                  */
+/* -------------------------------------------------------------------------- */
+.c-fulfillment-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.c-fulfillment-option {
+  border: 2px solid var(--c-border);
+  border-radius: var(--c-radius-sm);
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  transition: var(--c-transition);
+}
+
+.c-fulfillment-option:hover {
+  border-color: var(--c-primary);
+  background: var(--c-primary-light);
+}
+
+.c-fulfillment-option input[type="radio"] {
+  accent-color: var(--c-primary);
+  width: 18px;
+  height: 18px;
+}
+
+.c-fulfillment-option.active {
+  border-color: var(--c-primary);
+  background: #F0FDF4;
+}
+
+.c-payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.c-payment-card {
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--c-radius-sm);
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--c-transition);
+}
+
+.c-payment-card:hover {
+  border-color: var(--c-primary);
+  background: #F9FCF9;
+}
+
+.c-payment-card.active {
+  border-color: var(--c-primary);
+  background: #F0FDF4;
+}
+
+.c-payment-info {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.c-payment-badge {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  background: #E0E7FF;
+  color: #3730A3;
+}
+
+.c-form-group {
+  margin-bottom: 1.25rem;
+}
+
+.c-form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--c-charcoal);
+}
+
+.c-form-input, .c-form-textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius-sm);
+  font-size: 0.95rem;
+  background: #FFF;
+  color: var(--c-text);
+  box-sizing: border-box;
+  transition: border-color 0.15s ease;
+}
+
+.c-form-input:focus, .c-form-textarea:focus {
+  border-color: var(--c-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(34, 164, 71, 0.15);
+}
+
+.c-coupon-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Status Badges & Pills                                                      */
+/* -------------------------------------------------------------------------- */
+.c-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.c-badge-placed { background: #FEF3C7; color: #92400E; }
+.c-badge-preparing { background: #E0E7FF; color: #3730A3; }
+.c-badge-ready { background: #CFFAFE; color: #155E75; }
+.c-badge-out_for_delivery,
+.c-badge-out-for-delivery { background: #EDE9FE; color: #5B21B6; }
+.c-badge-collected { background: #D1FAE5; color: #065F46; }
+.c-badge-completed { background: #DCFCE7; color: #166534; }
+.c-badge-cancelled { background: #FEE2E2; color: #991B1B; }
+
+.c-badge-paid { background: #DCFCE7; color: #166534; }
+.c-badge-pending { background: #FEF3C7; color: #92400E; }
+.c-badge-refunded { background: #F3E8FF; color: #6B21A8; }
+.c-badge-failed { background: #FEE2E2; color: #991B1B; }
+
+/* -------------------------------------------------------------------------- */
+/* Order Tracking Stepper / Timeline                                          */
+/* -------------------------------------------------------------------------- */
+.c-stepper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 2.5rem 0 3rem 0;
+  padding: 0 1rem;
+}
+
+.c-stepper::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 2.5rem;
+  right: 2.5rem;
+  height: 4px;
+  background: var(--c-border);
+  z-index: 1;
+}
+
+.c-step-item {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.c-step-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #FFF;
+  border: 3px solid var(--c-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--c-muted);
+  margin-bottom: 0.6rem;
+  transition: var(--c-transition);
+}
+
+.c-step-item.completed .c-step-circle {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #FFF;
+}
+
+.c-step-item.current .c-step-circle {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+  box-shadow: 0 0 0 5px rgba(34, 164, 71, 0.2);
+  animation: c-pulse 2s infinite;
+}
+
+@keyframes c-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 164, 71, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(34, 164, 71, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 164, 71, 0); }
+}
+
+.c-step-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+
+.c-step-item.completed .c-step-title,
+.c-step-item.current .c-step-title {
+  color: var(--c-charcoal);
+  font-weight: 700;
+}
+
+.c-step-time {
+  font-size: 0.75rem;
+  color: #9CA3AF;
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 640px) {
+  .c-stepper {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-left: 2rem;
+  }
+  .c-stepper::before {
+    top: 1rem;
+    bottom: 1rem;
+    left: 2.75rem;
+    width: 4px;
+    height: auto;
+  }
+  .c-step-item {
+    flex-direction: row;
+    text-align: left;
+    gap: 1.25rem;
+  }
+  .c-step-circle {
+    margin-bottom: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Kitchen Queue Management                                                   */
+/* -------------------------------------------------------------------------- */
+.c-kitchen-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.c-filter-pill {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: #FFF;
+  border: 1px solid var(--c-border);
+  color: var(--c-charcoal);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--c-transition);
+}
+
+.c-filter-pill:hover {
+  border-color: var(--c-primary);
+  background: #F9FCF9;
+}
+
+.c-filter-pill.active {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #FFF;
+}
+
+.c-kitchen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+
+.c-kitchen-card {
+  background: #FFF;
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--c-radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--c-shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.c-kitchen-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--c-shadow-hover);
+}
+
+.c-kitchen-card.status-placed { border-top: 4px solid #F59E0B; }
+.c-kitchen-card.status-preparing { border-top: 4px solid #6366F1; }
+.c-kitchen-card.status-ready { border-top: 4px solid #06B6D4; }
+.c-kitchen-card.status-out_for_delivery { border-top: 4px solid #8B5CF6; }
+.c-kitchen-card.status-collected { border-top: 4px solid #10B981; }
+
+.c-kitchen-items-list {
+  background: #F8FAF8;
+  border-radius: var(--c-radius-sm);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  list-style: none;
+}
+
+.c-kitchen-items-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+  border-bottom: 1px dotted var(--c-border);
+}
+
+.c-kitchen-items-list li:last-child {
+  border-bottom: none;
+}
+
+.c-kitchen-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Administrator Reports Styles                                               */
+/* -------------------------------------------------------------------------- */
+.c-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.c-kpi-card {
+  background: #FFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--c-shadow);
+}
+
+.c-kpi-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--c-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.c-kpi-val {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--c-charcoal);
+  line-height: 1.2;
+}
+
+.c-kpi-label {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+}
+
+.c-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.c-bar-label {
+  width: 140px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--c-charcoal);
+  white-space: nowrap;
+}
+
+.c-bar-track {
+  flex: 1;
+  height: 18px;
+  background: #EEF2EF;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.c-bar-fill {
+  height: 100%;
+  background: var(--c-primary);
+  border-radius: 9999px;
+  transition: width 0.5s ease;
+}
+
+.c-bar-meta {
+  width: 60px;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--c-muted);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Printable Invoice (@media print)                                           */
+/* -------------------------------------------------------------------------- */
+@media print {
+  body {
+    background: #FFF !important;
+    color: #000 !important;
+    font-size: 12pt;
+  }
+
+  .site-header,
+  .site-footer,
+  .mobile-nav-toggle,
+  .c-no-print,
+  .btn,
+  .c-btn-block {
+    display: none !important;
+  }
+
+  .main-content {
+    padding: 0 !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .c-card {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .c-invoice-print-header {
+    display: block !important;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .c-cart-table th {
+    background: #E5E5E5 !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+  }
+
+  .c-cart-table td {
+    border: 1px solid #CCC !important;
+  }
+}
