@@ -130,13 +130,10 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
 <div class="auth-wrapper">
     <div class="auth-card">
         <div class="auth-header">
-            <div class="auth-icon-circle">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <line x1="19" y1="8" x2="19" y2="14"/>
-                    <line x1="22" y1="11" x2="16" y2="11"/>
-                </svg>
+            <div class="auth-logo-wrapper">
+                <a href="<?= base_url('index.php') ?>" title="Return to Home">
+                    <img src="<?= base_url('images/logo.png') ?>" alt="UrbanEats Logo" class="auth-logo-img">
+                </a>
             </div>
             <h1>Create Account</h1>
             <p>Join UrbanEats Cloud Kitchen Platform</p>

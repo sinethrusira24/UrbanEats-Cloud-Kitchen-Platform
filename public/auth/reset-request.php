@@ -91,12 +91,10 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
 <div class="auth-wrapper">
     <div class="auth-card">
         <div class="auth-header">
-            <div class="auth-icon-circle">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="7.5" cy="15.5" r="5.5"/>
-                    <path d="m21 2-9.6 9.6"/>
-                    <path d="m15.5 7.5 3 3L22 7l-3-3"/>
-                </svg>
+            <div class="auth-logo-wrapper">
+                <a href="<?= base_url('index.php') ?>" title="Return to Home">
+                    <img src="<?= base_url('images/logo.png') ?>" alt="UrbanEats Logo" class="auth-logo-img">
+                </a>
             </div>
             <h1>Password Reset</h1>
             <p>Enter your username or email to reset your account password</p>

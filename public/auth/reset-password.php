@@ -125,11 +125,10 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
 <div class="auth-wrapper">
     <div class="auth-card">
         <div class="auth-header">
-            <div class="auth-icon-circle">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
+            <div class="auth-logo-wrapper">
+                <a href="<?= base_url('index.php') ?>" title="Return to Home">
+                    <img src="<?= base_url('images/logo.png') ?>" alt="UrbanEats Logo" class="auth-logo-img">
+                </a>
             </div>
             <h1>Set New Password</h1>
             <?php if ($resetRecord && $tokenValid): ?>
