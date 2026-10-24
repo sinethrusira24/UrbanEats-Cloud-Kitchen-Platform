@@ -303,14 +303,14 @@ function format_lkr(float|int|string $price): string
 function render_stock_badge(int $qty_available, int $reorder_level = 5, bool $showQuantity = false): string
 {
     if ($qty_available <= 0) {
-        return '<span class="badge badge-danger">Out of Stock</span>';
+        return '<span class="badge badge-danger" style="background-color: #dc2626 !important; color: #ffffff !important;">Out of Stock</span>';
     }
 
     if ($qty_available <= $reorder_level) {
         $text = $showQuantity ? sprintf('Low Stock (%d left)', $qty_available) : 'Low Stock';
-        return '<span class="badge badge-warning">' . htmlspecialchars($text, ENT_QUOTES, 'UTF-8') . '</span>';
+        return '<span class="badge badge-warning" style="background-color: #fed7aa !important; color: #9a3412 !important; border: 1px solid #fdba74 !important;">' . htmlspecialchars($text, ENT_QUOTES, 'UTF-8') . '</span>';
     }
 
     $text = $showQuantity ? sprintf('In Stock (%d)', $qty_available) : 'In Stock';
-    return '<span class="badge badge-success">' . htmlspecialchars($text, ENT_QUOTES, 'UTF-8') . '</span>';
+    return '<span class="badge badge-success" style="background-color: #16a34a !important; color: #ffffff !important;">' . htmlspecialchars($text, ENT_QUOTES, 'UTF-8') . '</span>';
 }

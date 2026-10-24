@@ -733,6 +733,36 @@
   z-index: 2;
 }
 
+.dish-stock-overlay .badge {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  font-weight: 700;
+  border-radius: var(--radius-full, 9999px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+/* Stock Status Badges */
+.badge-success {
+  background-color: #16a34a !important; /* Green BG */
+  color: #ffffff !important;
+  border: 1px solid #15803d !important;
+}
+
+.badge-danger {
+  background-color: #dc2626 !important; /* Red BG */
+  color: #ffffff !important;
+  border: 1px solid #b91c1c !important;
+}
+
+.badge-warning {
+  background-color: #fed7aa !important; /* Light Orange BG */
+  color: #9a3412 !important;            /* High-contrast readable dark orange */
+  border: 1px solid #fdba74 !important;
+}
+
 .dish-card-body {
   padding: 1.25rem;
   display: flex;

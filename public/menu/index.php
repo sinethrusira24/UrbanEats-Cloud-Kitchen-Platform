@@ -456,10 +456,19 @@ include dirname(__DIR__, 2) . '/includes/header.php';
 
                         <div class="dish-card-footer">
                             <div class="dish-price-tag"><?= format_lkr((float)$dish['price']) ?></div>
-                            <div>
+                            <div style="display: inline-flex; gap: 0.4rem; align-items: center;">
                                 <a href="<?= base_url('menu/detail.php?id=' . (int)$dish['dish_id']) ?>" class="btn btn-outline btn-sm">
                                     Details
                                 </a>
+                                <?php if ($qty > 0): ?>
+                                    <a href="<?= base_url('orders/cart.php?add=' . (int)$dish['dish_id'] . '&return=menu/index.php') ?>" class="btn btn-primary btn-sm" title="Add to Cart">
+                                        🛒 Add
+                                    </a>
+                                <?php else: ?>
+                                    <button type="button" class="btn btn-outline btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;" title="Out of Stock">
+                                        Sold Out
+                                    </button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

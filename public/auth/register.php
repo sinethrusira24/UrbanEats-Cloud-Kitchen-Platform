@@ -10,7 +10,7 @@ require_once dirname(__DIR__, 2) . '/includes/bootstrap.php';
 
 // Redirect if already authenticated
 if (is_logged_in()) {
-    redirect(current_user_role() === 'admin' ? 'admin/index.php' : 'auth/profile.php');
+    redirect(current_user_role() === 'admin' ? 'admin/index.php' : 'menu/index.php');
 }
 
 $errors = [];
@@ -114,6 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Audit Log
             log_action('user_registration', "Customer account registered: {$username} ({$email})", $newUserId);
+
+            // Clear any lingering target URL so new user logs straight into menu
+            unset($_SESSION['redirect_after_login']);
 
             flash('success', 'Registration successful! You may now sign in with your credentials.');
             redirect('auth/login.php');
