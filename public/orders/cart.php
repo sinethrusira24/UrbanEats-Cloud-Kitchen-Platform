@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             flash('danger', $result['message']);
         }
         // Redirect cleanly so page refresh does not re-add the item
-        redirect('orders/cart.php');
+        $returnUrl = !empty($_GET['return']) ? (string)$_GET['return'] : 'orders/cart.php';
+        redirect($returnUrl);
     }
 }
 

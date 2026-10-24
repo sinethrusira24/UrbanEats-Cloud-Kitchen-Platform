@@ -250,6 +250,58 @@ img {
   color: var(--text-main);
 }
 
+.nav-cart-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: var(--bg-main);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.nav-cart-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.nav-cart-btn .cart-icon-svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+.nav-cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(220, 38, 38, 0.4);
+  animation: cartBadgePop 0.25s ease-out;
+}
+
+@keyframes cartBadgePop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 .mobile-nav-toggle {
   display: none;
   background: var(--bg-main);
@@ -1334,6 +1386,34 @@ select.form-control {
   background: #fef2f2;
   border: 1px solid #fecaca;
   color: #dc2626;
+}
+
+/* Stock Status Badges */
+.badge-success {
+  background-color: #16a34a !important; /* In Stock: Green BG */
+  color: #ffffff !important;
+  border: 1px solid #15803d !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.badge-danger {
+  background-color: #dc2626 !important; /* Out of Stock: Red BG */
+  color: #ffffff !important;
+  border: 1px solid #b91c1c !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.badge-warning {
+  background-color: #fed7aa !important; /* Low Stock: Light Orange BG */
+  color: #9a3412 !important;            /* High-contrast readable dark orange */
+  border: 1px solid #fdba74 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.badge-info {
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
 }
 
 /* -------------------------------------------------------------------------

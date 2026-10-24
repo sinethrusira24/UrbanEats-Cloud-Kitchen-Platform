@@ -17,6 +17,10 @@ $isHome = str_ends_with($currentScript, 'index.php') && !str_contains($currentSc
 $isMenu = str_contains($currentScript, '/menu/index.php') || str_contains($currentScript, '/menu/detail.php');
 $isAdmin = str_contains($currentScript, '/admin/');
 $isKitchen = str_contains($currentScript, '/menu/manage.php') || str_contains($currentScript, '/menu/stock.php') || str_contains($currentScript, '/menu/categories.php') || str_contains($currentScript, '/menu/dish-form.php');
+$cartCount = 0;
+if (is_logged_in() && isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+    $cartCount = (int)array_sum($_SESSION['cart']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +77,7 @@ $isKitchen = str_contains($currentScript, '/menu/manage.php') || str_contains($c
                             </li>
                         <?php endif; ?>
 
+                        <li class="mobile-only-link"><a href="<?= base_url('orders/cart.php') ?>" class="nav-link <?= str_contains($currentScript, 'orders/cart.php') ? 'active' : '' ?>">🛒 My Cart (<?= $cartCount ?>)</a></li>
                         <li class="mobile-only-link"><a href="<?= base_url('auth/profile.php') ?>" class="nav-link <?= str_contains($currentScript, 'auth/profile.php') ? 'active' : '' ?>">My Profile</a></li>
                         <li class="mobile-only-link"><a href="<?= base_url('auth/change-password.php') ?>" class="nav-link <?= str_contains($currentScript, 'auth/change-password.php') ? 'active' : '' ?>">Security</a></li>
                     <?php endif; ?>
@@ -81,10 +86,21 @@ $isKitchen = str_contains($currentScript, '/menu/manage.php') || str_contains($c
 
             <div class="nav-actions">
                 <?php if (is_logged_in() && $currentUser): ?>
+                    <!-- Shopping Cart Button with Dynamic Badge -->
+                    <a href="<?= base_url('orders/cart.php') ?>" class="nav-cart-btn" aria-label="Shopping Cart (<?= $cartCount ?> items)" title="View Shopping Cart">
+                        <svg class="cart-icon-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <?php if ($cartCount > 0): ?>
+                            <span class="nav-cart-badge" id="navCartBadge"><?= $cartCount > 99 ? '99+' : $cartCount ?></span>
+                        <?php endif; ?>
+                    </a>
+
                     <div class="user-profile-menu">
                         <button type="button" class="user-badge-nav user-dropdown-btn" id="userMenuBtn" aria-haspopup="true" aria-expanded="false" title="Account settings">
-                            <span class="user-name"><?= e($currentUser['username']) ?></span>
-                            <span class="badge badge-<?= e($currentRole) ?>"><?= e(str_replace('_', ' ', (string)$currentRole)) ?></span>
+                            <span class="user-name"><?= e(!empty($currentUser['full_name']) ? $currentUser['full_name'] : $currentUser['username']) ?></span>
                             <span class="dropdown-caret">▾</span>
                         </button>
                         <div class="user-dropdown-dropdown" id="userDropdownContent">

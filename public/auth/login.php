@@ -10,7 +10,7 @@ require_once dirname(__DIR__, 2) . '/includes/bootstrap.php';
 
 // Redirect if already authenticated
 if (is_logged_in()) {
-    redirect(current_user_role() === 'admin' ? 'admin/index.php' : 'auth/profile.php');
+    redirect(current_user_role() === 'admin' ? 'admin/index.php' : 'menu/index.php');
 }
 
 $error = null;
@@ -105,13 +105,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (!empty($_SESSION['redirect_after_login'])) {
                         $target = $_SESSION['redirect_after_login'];
                         unset($_SESSION['redirect_after_login']);
+                        // Safeguard: non-admin users should not be redirected to admin routes
+                        if (str_contains($target, 'admin/') && $user['role_name'] !== 'admin') {
+                            redirect('menu/index.php');
+                        }
                         redirect($target);
                     }
 
                     if ($user['role_name'] === 'admin') {
                         redirect('admin/index.php');
+                    } elseif ($user['role_name'] === 'kitchen_staff') {
+                        redirect('menu/manage.php');
                     } else {
-                        redirect('auth/profile.php');
+                        redirect('menu/index.php');
                     }
                 }
             }
