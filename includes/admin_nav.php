@@ -35,6 +35,18 @@ $navTabs = [
         'match' => 'admin/audit-log.php',
     ],
     [
+        'label' => 'Sales Reports',
+        'icon'  => '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+        'url'   => base_url('admin/reports.php'),
+        'match' => 'admin/reports.php',
+    ],
+    [
+        'label' => 'Kitchen Queue',
+        'icon'  => '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13.87A8 8 0 0 1 14 6h1a4 4 0 0 1 4 4v3.87"/><path d="M4 17h16v2H4z"/><path d="M9 17v4"/><path d="M15 17v4"/></svg>',
+        'url'   => base_url('orders/kitchen.php'),
+        'match' => 'orders/kitchen.php',
+    ],
+    [
         'label' => 'Menu Dishes',
         'icon'  => '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>',
         'url'   => base_url('menu/manage.php'),

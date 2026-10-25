@@ -311,4 +311,13 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
     </div>
 </div>
 
+<?php if (!$isCancelled && $currentStatus !== 'Completed'): ?>
+<script>
+    // Automatically refresh tracking status every 15 seconds while order is in kitchen progress
+    setTimeout(function () {
+        window.location.reload();
+    }, 15000);
+</script>
+<?php endif; ?>
+
 <?php require_once dirname(__DIR__, 2) . '/includes/footer.php'; ?>
