@@ -58,7 +58,7 @@ $countStmt->execute($params);
 $totalRecords = (int)$countStmt->fetchColumn();
 
 // Compute pagination
-$pagination = paginate($totalRecords, $perPage, $page, base_url('admin/audit-log.php'), [
+$pagination = paginate($totalRecords, $perPage, $page, 'audit-log.php', [
     'action_filter' => $searchAction,
     'search'        => $searchQuery,
     'date_from'     => $dateFrom,
@@ -100,7 +100,7 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 </div>
 
 <!-- Filtering Toolbar -->
-<form action="<?= base_url('admin/audit-log.php') ?>" method="GET" class="filter-bar">
+<form action="audit-log.php" method="GET" class="filter-bar">
     <div class="filter-item" style="min-width: 200px;">
         <label for="search" class="form-label" style="font-size: 0.8rem;">Search Keyword (Details, User, IP)</label>
         <input type="text"
@@ -113,7 +113,7 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 
     <div class="filter-item" style="max-width: 220px;">
         <label for="action_filter" class="form-label" style="font-size: 0.8rem;">Action Type</label>
-        <select id="action_filter" name="action_filter" class="form-control">
+        <select id="action_filter" name="action_filter" class="form-control" onchange="this.form.submit()">
             <option value="">All Action Types</option>
             <?php foreach ($distinctActions as $act): ?>
                 <option value="<?= e($act) ?>" <?= $searchAction === $act ? 'selected' : '' ?>>
@@ -125,18 +125,18 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 
     <div class="filter-item" style="max-width: 160px;">
         <label for="date_from" class="form-label" style="font-size: 0.8rem;">Date From</label>
-        <input type="date" id="date_from" name="date_from" class="form-control" value="<?= e($dateFrom) ?>">
+        <input type="date" id="date_from" name="date_from" class="form-control" value="<?= e($dateFrom) ?>" onchange="this.form.submit()">
     </div>
 
     <div class="filter-item" style="max-width: 160px;">
         <label for="date_to" class="form-label" style="font-size: 0.8rem;">Date To</label>
-        <input type="date" id="date_to" name="date_to" class="form-control" value="<?= e($dateTo) ?>">
+        <input type="date" id="date_to" name="date_to" class="form-control" value="<?= e($dateTo) ?>" onchange="this.form.submit()">
     </div>
 
     <div class="filter-actions">
         <button type="submit" class="btn btn-secondary">Filter</button>
         <?php if ($searchQuery !== '' || $searchAction !== '' || $dateFrom !== '' || $dateTo !== ''): ?>
-            <a href="<?= base_url('admin/audit-log.php') ?>" class="btn btn-outline" title="Reset all filters">Reset</a>
+            <a href="audit-log.php" class="btn btn-outline" title="Reset all filters">Reset</a>
         <?php endif; ?>
     </div>
 </form>
