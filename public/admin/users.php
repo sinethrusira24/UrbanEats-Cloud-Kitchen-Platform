@@ -240,11 +240,14 @@ $whereSql = implode(' AND ', $whereClauses);
 
 // Count total matching records
 $countStmt = $pdo->prepare("SELECT COUNT(*) FROM users u INNER JOIN roles r ON u.role_id = r.role_id WHERE {$whereSql}");
-$countStmt->execute($params);
+foreach ($params as $key => $val) {
+    $countStmt->bindValue($key, $val, is_int($val) ? PDO::PARAM_INT : PDO::PARAM_STR);
+}
+$countStmt->execute();
 $totalRecords = (int)$countStmt->fetchColumn();
 
 // Compute pagination
-$pagination = paginate($totalRecords, $perPage, $page, base_url('admin/users.php'), [
+$pagination = paginate($totalRecords, $perPage, $page, 'users.php', [
     'search' => $search,
     'role'   => $filterRole,
     'status' => $filterStatus,
@@ -261,7 +264,7 @@ $sql = "SELECT u.user_id, u.role_id, u.full_name, u.username, u.email, u.is_acti
 
 $userListStmt = $pdo->prepare($sql);
 foreach ($params as $key => $val) {
-    $userListStmt->bindValue($key, $val);
+    $userListStmt->bindValue($key, $val, is_int($val) ? PDO::PARAM_INT : PDO::PARAM_STR);
 }
 $userListStmt->bindValue(':offset', $pagination['offset'], PDO::PARAM_INT);
 $userListStmt->bindValue(':per_page', $perPage, PDO::PARAM_INT);
@@ -284,7 +287,7 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 </div>
 
 <!-- Search & Filtering Toolbar -->
-<form action="<?= base_url('admin/users.php') ?>" method="GET" class="filter-bar">
+<form action="users.php" method="GET" class="filter-bar">
     <div class="filter-item">
         <label for="search" class="form-label" style="font-size:0.8rem;">Search Name / Username / Email</label>
         <input type="text"
@@ -297,7 +300,7 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 
     <div class="filter-item" style="max-width: 180px;">
         <label for="role" class="form-label" style="font-size:0.8rem;">Role</label>
-        <select id="role" name="role" class="form-control">
+        <select id="role" name="role" class="form-control" onchange="this.form.submit()">
             <option value="">All Roles</option>
             <option value="admin" <?= $filterRole === 'admin' ? 'selected' : '' ?>>Administrator</option>
             <option value="kitchen_staff" <?= $filterRole === 'kitchen_staff' ? 'selected' : '' ?>>Kitchen Staff</option>
@@ -307,7 +310,7 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 
     <div class="filter-item" style="max-width: 160px;">
         <label for="status" class="form-label" style="font-size:0.8rem;">Status</label>
-        <select id="status" name="status" class="form-control">
+        <select id="status" name="status" class="form-control" onchange="this.form.submit()">
             <option value="">All Statuses</option>
             <option value="1" <?= $filterStatus === '1' ? 'selected' : '' ?>>Active Only</option>
             <option value="0" <?= $filterStatus === '0' ? 'selected' : '' ?>>Suspended Only</option>
@@ -317,7 +320,7 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
     <div class="filter-actions">
         <button type="submit" class="btn btn-secondary">Apply Filters</button>
         <?php if ($search !== '' || $filterRole !== '' || $filterStatus !== ''): ?>
-            <a href="<?= base_url('admin/users.php') ?>" class="btn btn-outline" title="Reset all filters">Reset</a>
+            <a href="users.php" class="btn btn-outline" title="Reset all filters">Reset</a>
         <?php endif; ?>
     </div>
 </form>
