@@ -52,13 +52,13 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
         All Orders
     </a>
     <a href="<?= base_url('orders/history.php?filter=active') ?>" class="c-filter-pill <?= $filter === 'active' ? 'active' : '' ?>">
-        🔥 Active Orders
+        Active Orders
     </a>
     <a href="<?= base_url('orders/history.php?filter=completed') ?>" class="c-filter-pill <?= $filter === 'completed' ? 'active' : '' ?>">
-        ✅ Completed
+        Completed
     </a>
     <a href="<?= base_url('orders/history.php?filter=cancelled') ?>" class="c-filter-pill <?= $filter === 'cancelled' ? 'active' : '' ?>">
-        ❌ Cancelled
+        Cancelled
     </a>
 </div>
 
@@ -138,10 +138,10 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
                             <td style="text-align: right; white-space: nowrap;">
                                 <div style="display: inline-flex; gap: 0.4rem;">
                                     <a href="<?= base_url('orders/track.php?id=' . $ord['order_id']) ?>" class="btn btn-outline btn-sm" title="Track Live Status" style="font-size: 0.8rem; padding: 0.35rem 0.65rem;">
-                                        🚚 Track
+                                        Track
                                     </a>
                                     <a href="<?= base_url('orders/confirmation.php?id=' . $ord['order_id']) ?>" class="btn btn-outline btn-sm" title="View Printable Invoice" style="font-size: 0.8rem; padding: 0.35rem 0.65rem;">
-                                        📄 Receipt
+                                        Receipt
                                     </a>
                                 </div>
                             </td>

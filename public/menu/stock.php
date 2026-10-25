@@ -147,10 +147,10 @@ include dirname(__DIR__, 2) . '/includes/header.php';
 
         <div style="display: flex; gap: 0.75rem;">
             <a href="<?= base_url('menu/manage.php') ?>" class="btn btn-outline">
-                🍽️ Manage Dishes
+                Manage Dishes
             </a>
             <a href="<?= base_url('menu/categories.php') ?>" class="btn btn-outline">
-                🏷️ Categories
+                Categories
             </a>
         </div>
     </div>
@@ -303,7 +303,7 @@ include dirname(__DIR__, 2) . '/includes/header.php';
                                         <button type="button"
                                                 class="btn btn-primary btn-sm"
                                                 onclick="openAdjustmentModal(<?= (int)$item['dish_id'] ?>, '<?= e(addslashes($item['dish_name'])) ?>', 'Restock', <?= $qty ?>)">
-                                            ➕ Restock
+                                            Restock
                                         </button>
 
                                         <!-- Wastage Trigger Button -->
@@ -311,7 +311,7 @@ include dirname(__DIR__, 2) . '/includes/header.php';
                                                 class="btn btn-outline btn-sm"
                                                 style="color: var(--danger); border-color: var(--danger-border);"
                                                 onclick="openAdjustmentModal(<?= (int)$item['dish_id'] ?>, '<?= e(addslashes($item['dish_name'])) ?>', 'Wastage', <?= $qty ?>)">
-                                            🗑️ Wastage
+                                            Wastage
                                         </button>
                                     </div>
                                 </td>

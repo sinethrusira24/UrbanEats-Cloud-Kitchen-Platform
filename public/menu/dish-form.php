@@ -438,7 +438,7 @@ include dirname(__DIR__, 2) . '/includes/header.php';
             <div style="display: flex; justify-content: flex-end; gap: 1rem;">
                 <a href="<?= base_url('menu/manage.php') ?>" class="btn btn-outline">Cancel</a>
                 <button type="submit" class="btn btn-primary btn-lg">
-                    <?= $isEdit ? '💾 Update Dish' : '➕ Save & Publish Dish' ?>
+                    <?= $isEdit ? 'Update Dish' : 'Save & Publish Dish' ?>
                 </button>
             </div>
         </form>

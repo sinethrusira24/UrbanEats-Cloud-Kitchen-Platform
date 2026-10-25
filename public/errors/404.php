@@ -28,7 +28,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
 
     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
         <a href="<?= base_url('index.php') ?>" class="btn btn-primary">
-            🏠 Return to Home
+            Return to Home
         </a>
         <button type="button" class="btn btn-outline" onclick="history.back();">
             &larr; Go Back

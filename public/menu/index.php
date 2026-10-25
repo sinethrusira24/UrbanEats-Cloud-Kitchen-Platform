@@ -462,7 +462,7 @@ include dirname(__DIR__, 2) . '/includes/header.php';
                                 </a>
                                 <?php if ($qty > 0): ?>
                                     <a href="<?= base_url('orders/cart.php?add=' . (int)$dish['dish_id'] . '&return=menu/index.php') ?>" class="btn btn-primary btn-sm" title="Add to Cart">
-                                        🛒 Add
+                                        Add to Cart
                                     </a>
                                 <?php else: ?>
                                     <button type="button" class="btn btn-outline btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;" title="Out of Stock">

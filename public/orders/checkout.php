@@ -310,14 +310,14 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
 
                 <?php if (!empty($couponInfo)): ?>
                     <div style="margin-top: 0.75rem; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 6px; padding: 0.6rem 0.85rem; font-size: 0.85rem; color: #166534; display: flex; justify-content: space-between; align-items: center;">
-                        <span>✅ <strong><?= e($couponInfo['coupon_code']) ?></strong> (<?= e($couponInfo['discount_type'] === 'percentage' ? (int)$couponInfo['discount_value'] . '%' : format_lkr($couponInfo['discount_value'])) ?> off)</span>
-                        <a href="<?= base_url('orders/checkout.php') ?>" style="color: var(--c-danger); font-size: 0.8rem; text-decoration: none;">✕ Remove</a>
+                        <span><strong><?= e($couponInfo['coupon_code']) ?></strong> (<?= e($couponInfo['discount_type'] === 'percentage' ? (int)$couponInfo['discount_value'] . '%' : format_lkr($couponInfo['discount_value'])) ?> off)</span>
+                        <a href="<?= base_url('orders/checkout.php') ?>" style="color: var(--c-danger); font-size: 0.8rem; text-decoration: none;">Remove</a>
                     </div>
                 <?php endif; ?>
 
                 <?php if (!empty($errors['coupon'])): ?>
                     <div style="color: var(--c-danger); font-size: 0.82rem; margin-top: 0.5rem;">
-                        ⚠️ <?= e($errors['coupon']) ?>
+                        <?= e($errors['coupon']) ?>
                     </div>
                 <?php endif; ?>
             </div>
@@ -362,7 +362,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
 
                 <div style="margin-top: 1.5rem;">
                     <button type="submit" class="c-btn-block c-btn-primary" id="submitOrderBtn">
-                        🔒 Confirm & Place Order (<?= format_lkr($finalTotal) ?>)
+                        Confirm & Place Order (<?= format_lkr($finalTotal) ?>)
                     </button>
                 </div>
 

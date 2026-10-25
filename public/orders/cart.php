@@ -13,7 +13,7 @@ require_once dirname(__DIR__, 2) . '/includes/bootstrap.php';
 require_once dirname(__DIR__, 2) . '/includes/component_c.php';
 
 // 1. Handle GET query parameters for adding dishes
-// Supports direct integration from Component B menu/detail.php (<a href="orders/cart.php?add=ID">)
+// Supports direct integration from Component B menu/detail.php (orders/cart.php?add=ID)
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $dishId = 0;
     if (!empty($_GET['add'])) {
@@ -309,7 +309,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
                 <div style="margin-top: 1.5rem;">
                     <?php if ($hasUnavailable): ?>
                         <button type="button" class="c-btn-block c-btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">
-                            ⚠️ Adjust Unavailable Items
+                            Adjust Unavailable Items
                         </button>
                         <p style="text-align: center; font-size: 0.8rem; color: var(--c-danger); margin-top: 0.5rem;">
                             Please resolve stock issues before proceeding.

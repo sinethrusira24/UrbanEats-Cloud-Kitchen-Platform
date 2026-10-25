@@ -36,10 +36,10 @@ if (file_exists($headerPath) && function_exists('base_url')) {
 
     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
         <a href="<?= function_exists('base_url') ? base_url('index.php') : '../index.php' ?>" class="btn btn-primary">
-            🏠 Return to Home
+            Return to Home
         </a>
         <button type="button" class="btn btn-outline" onclick="location.reload();">
-            🔄 Retry Request
+            Retry Request
         </button>
     </div>
 </div>

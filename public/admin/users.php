@@ -282,7 +282,7 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
         <p class="page-subtitle">Search, filter, manage roles, and toggle access states</p>
     </div>
     <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('createUserCard').scrollIntoView({behavior: 'smooth'});">
-        ➕ Add New User
+        + Add New User
     </button>
 </div>
 
@@ -451,7 +451,7 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
 <!-- Create New User Section -->
 <div class="card" id="createUserCard" style="margin-top: 3rem;">
     <div class="card-header">
-        <h2 style="font-size: 1.15rem; margin: 0;">➕ Create System Account (Staff or Administrator)</h2>
+        <h2 style="font-size: 1.15rem; margin: 0;">Create System Account (Staff or Administrator)</h2>
     </div>
     <form action="<?= base_url('admin/users.php') ?>" method="POST" novalidate>
         <?= csrf_field() ?>

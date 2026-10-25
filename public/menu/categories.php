@@ -156,10 +156,10 @@ include dirname(__DIR__, 2) . '/includes/header.php';
 
         <div style="display: flex; gap: 0.75rem;">
             <a href="<?= base_url('menu/manage.php') ?>" class="btn btn-outline">
-                🍽️ Manage Dishes
+                Manage Dishes
             </a>
             <a href="<?= base_url('menu/stock.php') ?>" class="btn btn-outline">
-                📊 Stock Dashboard
+                Stock Dashboard
             </a>
         </div>
     </div>
@@ -170,7 +170,7 @@ include dirname(__DIR__, 2) . '/includes/header.php';
         <!-- Category Create/Edit Card -->
         <div class="card" style="padding: 1.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
             <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0 0 1rem; color: var(--text-main);">
-                <?= $editCategory ? '✏️ Edit Category' : '➕ Add Category' ?>
+                <?= $editCategory ? 'Edit Category' : 'Add Category' ?>
             </h2>
 
             <?php if (!empty($errors['general'])): ?>
@@ -298,7 +298,7 @@ include dirname(__DIR__, 2) . '/includes/header.php';
                                             <a href="<?= base_url('menu/categories.php?edit=' . (int)$c['category_id']) ?>"
                                                class="btn btn-outline btn-sm"
                                                title="Edit category">
-                                                ✏️ Edit
+                                                Edit
                                             </a>
 
                                             <!-- Toggle Status Mutation -->

@@ -115,7 +115,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
             <p class="page-subtitle">Manage your personal information and view account status</p>
         </div>
         <a href="<?= base_url('auth/change-password.php') ?>" class="btn btn-outline">
-            🔒 Change Password
+            Change Password
         </a>
     </div>
 
