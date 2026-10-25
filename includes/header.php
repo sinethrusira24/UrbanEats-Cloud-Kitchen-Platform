@@ -52,7 +52,12 @@ if (is_logged_in() && isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                     <li><a href="<?= base_url('menu/index.php') ?>" class="nav-link <?= $isMenu ? 'active' : '' ?>">Menu</a></li>
 
                     <?php if (is_logged_in()): ?>
+                        <?php if ($currentRole === 'customer'): ?>
+                            <li><a href="<?= base_url('orders/history.php') ?>" class="nav-link <?= str_contains($currentScript, 'orders/history.php') ? 'active' : '' ?>">My Orders</a></li>
+                        <?php endif; ?>
+
                         <?php if ($currentRole === 'kitchen_staff'): ?>
+                            <li><a href="<?= base_url('orders/kitchen.php') ?>" class="nav-link <?= str_contains($currentScript, 'orders/kitchen.php') ? 'active' : '' ?>">Kitchen Queue</a></li>
                             <li><a href="<?= base_url('menu/manage.php') ?>" class="nav-link <?= str_contains($currentScript, 'menu/manage.php') ? 'active' : '' ?>">Dishes</a></li>
                             <li><a href="<?= base_url('menu/stock.php') ?>" class="nav-link <?= str_contains($currentScript, 'menu/stock.php') ? 'active' : '' ?>">Stock</a></li>
                             <li><a href="<?= base_url('menu/categories.php') ?>" class="nav-link <?= str_contains($currentScript, 'menu/categories.php') ? 'active' : '' ?>">Categories</a></li>
@@ -69,7 +74,9 @@ if (is_logged_in() && isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                                     <li><a href="<?= base_url('admin/index.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'admin/index.php') ? 'active' : '' ?>">📊 Dashboard Overview</a></li>
                                     <li><a href="<?= base_url('admin/users.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'admin/users.php') ? 'active' : '' ?>">👥 User Management</a></li>
                                     <li><a href="<?= base_url('admin/audit-log.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'admin/audit-log.php') ? 'active' : '' ?>">📜 Security Audit Logs</a></li>
+                                    <li><a href="<?= base_url('admin/reports.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'admin/reports.php') ? 'active' : '' ?>">📈 Sales Reports</a></li>
                                     <li class="dropdown-divider-nav"></li>
+                                    <li><a href="<?= base_url('orders/kitchen.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'orders/kitchen.php') ? 'active' : '' ?>">🍳 Kitchen Order Queue</a></li>
                                     <li><a href="<?= base_url('menu/manage.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'menu/manage.php') ? 'active' : '' ?>">🍽️ Menu Dishes</a></li>
                                     <li><a href="<?= base_url('menu/stock.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'menu/stock.php') ? 'active' : '' ?>">📦 Inventory & Stock</a></li>
                                     <li><a href="<?= base_url('menu/categories.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'menu/categories.php') ? 'active' : '' ?>">🏷️ Categories</a></li>
@@ -78,6 +85,7 @@ if (is_logged_in() && isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                         <?php endif; ?>
 
                         <li class="mobile-only-link"><a href="<?= base_url('orders/cart.php') ?>" class="nav-link <?= str_contains($currentScript, 'orders/cart.php') ? 'active' : '' ?>">🛒 My Cart (<?= $cartCount ?>)</a></li>
+                        <li class="mobile-only-link"><a href="<?= base_url('orders/history.php') ?>" class="nav-link <?= str_contains($currentScript, 'orders/history.php') ? 'active' : '' ?>">📋 My Orders</a></li>
                         <li class="mobile-only-link"><a href="<?= base_url('auth/profile.php') ?>" class="nav-link <?= str_contains($currentScript, 'auth/profile.php') ? 'active' : '' ?>">My Profile</a></li>
                         <li class="mobile-only-link"><a href="<?= base_url('auth/change-password.php') ?>" class="nav-link <?= str_contains($currentScript, 'auth/change-password.php') ? 'active' : '' ?>">Security</a></li>
                     <?php endif; ?>
@@ -109,6 +117,9 @@ if (is_logged_in() && isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
                                 <span class="user-dropdown-email"><?= e($currentUser['email'] ?? '') ?></span>
                             </div>
                             <div class="dropdown-divider-nav"></div>
+                            <a href="<?= base_url('orders/history.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'orders/history.php') ? 'active' : '' ?>">
+                                📋 My Orders
+                            </a>
                             <a href="<?= base_url('auth/profile.php') ?>" class="dropdown-link <?= str_contains($currentScript, 'auth/profile.php') ? 'active' : '' ?>">
                                 👤 My Profile
                             </a>
