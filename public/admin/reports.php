@@ -67,7 +67,7 @@ if (file_exists($adminNavPath)) {
     </div>
     <div style="display: flex; gap: 0.5rem;">
         <button type="button" class="btn btn-outline btn-sm" onclick="window.print();">
-            🖨️ Export / Print Report
+            Export / Print Report
         </button>
     </div>
 </div>

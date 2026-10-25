@@ -82,7 +82,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
     <div style="display: flex; gap: 0.5rem; align-items: center;">
         <span style="font-size: 0.85rem; color: var(--c-muted);">Role: <strong><?= e(current_user_role()) ?></strong></span>
         <button type="button" class="btn btn-outline btn-sm" onclick="window.location.reload();">
-            🔄 Refresh Queue
+            Refresh Queue
         </button>
     </div>
 </div>
@@ -93,25 +93,25 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
         All (<?= $statusCounts['all'] ?>)
     </a>
     <a href="<?= base_url('orders/kitchen.php?status=Placed') ?>" class="c-filter-pill <?= $statusFilter === 'Placed' ? 'active' : '' ?>">
-        ⏳ Placed (<?= $statusCounts['Placed'] ?>)
+        Placed (<?= $statusCounts['Placed'] ?>)
     </a>
     <a href="<?= base_url('orders/kitchen.php?status=Preparing') ?>" class="c-filter-pill <?= $statusFilter === 'Preparing' ? 'active' : '' ?>">
-        🍳 Preparing (<?= $statusCounts['Preparing'] ?>)
+        Preparing (<?= $statusCounts['Preparing'] ?>)
     </a>
     <a href="<?= base_url('orders/kitchen.php?status=Ready') ?>" class="c-filter-pill <?= $statusFilter === 'Ready' ? 'active' : '' ?>">
-        🍱 Ready (<?= $statusCounts['Ready'] ?>)
+        Ready (<?= $statusCounts['Ready'] ?>)
     </a>
     <a href="<?= base_url('orders/kitchen.php?status=Out+for+Delivery') ?>" class="c-filter-pill <?= $statusFilter === 'Out for Delivery' ? 'active' : '' ?>">
-        🛵 Out for Delivery (<?= $statusCounts['Out for Delivery'] ?>)
+        Out for Delivery (<?= $statusCounts['Out for Delivery'] ?>)
     </a>
     <a href="<?= base_url('orders/kitchen.php?status=Collected') ?>" class="c-filter-pill <?= $statusFilter === 'Collected' ? 'active' : '' ?>">
-        🛍️ Collected (<?= $statusCounts['Collected'] ?>)
+        Collected (<?= $statusCounts['Collected'] ?>)
     </a>
     <a href="<?= base_url('orders/kitchen.php?status=Completed') ?>" class="c-filter-pill <?= $statusFilter === 'Completed' ? 'active' : '' ?>">
-        ✅ Completed (<?= $statusCounts['Completed'] ?>)
+        Completed (<?= $statusCounts['Completed'] ?>)
     </a>
     <a href="<?= base_url('orders/kitchen.php?status=Cancelled') ?>" class="c-filter-pill <?= $statusFilter === 'Cancelled' ? 'active' : '' ?>">
-        ❌ Cancelled (<?= $statusCounts['Cancelled'] ?>)
+        Cancelled (<?= $statusCounts['Cancelled'] ?>)
     </a>
 </div>
 
@@ -204,7 +204,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
                                         <input type="hidden" name="new_status" value="Cancelled">
                                         <input type="hidden" name="notes" value="Cancelled by kitchen staff">
                                         <button type="submit" class="btn btn-outline btn-sm" style="color: var(--c-danger); border-color: #FECACA; font-size: 0.78rem;">
-                                            ✕ Cancel Order
+                                            Cancel Order
                                         </button>
                                     </form>
                                 <?php else: ?>
@@ -229,7 +229,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
 
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px dotted var(--c-border); font-size: 0.78rem;">
                         <a href="<?= base_url('orders/track.php?id=' . $ord['order_id']) ?>" target="_blank" style="color: var(--c-muted); text-decoration: none;">
-                            🔍 View Timeline
+                            View Timeline
                         </a>
                         <span style="font-weight: 700; color: var(--c-charcoal);">
                             Total: <?= format_lkr($ord['total_amount']) ?>

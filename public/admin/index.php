@@ -79,10 +79,10 @@ require_once dirname(__DIR__, 2) . '/includes/admin_nav.php';
     </div>
     <div style="display: flex; gap: 0.75rem;">
         <a href="<?= base_url('admin/users.php') ?>" class="btn btn-primary btn-sm">
-            👥 User Management
+            User Management
         </a>
         <a href="<?= base_url('admin/audit-log.php') ?>" class="btn btn-outline btn-sm">
-            📜 Security Audit Log
+            Security Audit Log
         </a>
     </div>
 </div>

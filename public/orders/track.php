@@ -92,10 +92,10 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
     </div>
     <div style="display: flex; gap: 0.5rem;">
         <button type="button" class="btn btn-outline btn-sm" onclick="window.location.reload();">
-            🔄 Refresh Status
+            Refresh Status
         </button>
         <a href="<?= base_url('orders/confirmation.php?id=' . $orderId) ?>" class="btn btn-outline btn-sm">
-            📄 View Receipt
+            View Receipt
         </a>
     </div>
 </div>
@@ -188,7 +188,7 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
                     <?= csrf_field() ?>
                     <input type="hidden" name="action" value="cancel_order">
                     <button type="submit" class="btn btn-outline btn-sm" style="color: var(--c-danger); border-color: #FECACA;">
-                        ✕ Cancel Order
+                        Cancel Order
                     </button>
                     <span style="font-size: 0.8rem; color: var(--c-muted); margin-left: 0.5rem;">(Available before kitchen preparation starts)</span>
                 </form>

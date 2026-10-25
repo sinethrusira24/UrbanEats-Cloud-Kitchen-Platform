@@ -71,10 +71,10 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
     </div>
     <div style="display: flex; gap: 0.5rem;">
         <button type="button" class="btn btn-outline btn-sm" onclick="window.print()">
-            🖨️ Print Invoice
+            Print Invoice
         </button>
         <a href="<?= base_url('orders/track.php?id=' . $order['order_id']) ?>" class="btn btn-primary btn-sm">
-            🚚 Track Live Status
+            Track Live Status
         </a>
     </div>
 </div>

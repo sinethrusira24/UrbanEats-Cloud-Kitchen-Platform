@@ -29,15 +29,15 @@ require_once dirname(__DIR__, 2) . '/includes/header.php';
 
     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
         <a href="<?= base_url('index.php') ?>" class="btn btn-primary">
-            🏠 Return to Home
+            Return to Home
         </a>
         <?php if (!is_logged_in()): ?>
             <a href="<?= base_url('auth/login.php') ?>" class="btn btn-outline">
-                🔑 Sign In with Authorized Account
+                Sign In with Authorized Account
             </a>
         <?php else: ?>
             <a href="<?= base_url('auth/profile.php') ?>" class="btn btn-outline">
-                👤 Go to My Profile
+                Go to My Profile
             </a>
         <?php endif; ?>
     </div>
