@@ -1,13 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component C: Administrator Sales & Performance Reports
- *
- * Provides analytical reporting, date range filtering, gross/net sales calculations,
- * status distributions, top-selling dishes analysis, and fulfillment method breakdowns.
- *
- * NOTE: This file is assigned to and owned by Component C within the admin console.
- */
+// Administrator sales and performance reports.
 
 declare(strict_types=1);
 

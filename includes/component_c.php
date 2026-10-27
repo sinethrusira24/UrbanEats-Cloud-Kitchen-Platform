@@ -1,11 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component C: Ordering, Payment and Tracking
- *
- * Core Business Logic, Shopping Cart Engine, Checkout Transaction Manager,
- * Concurrency-Safe Order State Machine, and Reporting Analytics.
- */
 
 declare(strict_types=1);
 
@@ -16,16 +9,9 @@ require_once __DIR__ . '/csrf.php';
 require_once __DIR__ . '/stock.php';
 require_once __DIR__ . '/component_b.php';
 
-// =============================================================================
-// 1. SESSION-BASED SHOPPING CART MANAGEMENT
-// =============================================================================
+// 1. Session-based shopping cart management.
 
-/**
- * Retrieve the raw cart from the session.
- * Stores only [dish_id => quantity] mappings (never trusted prices or totals).
- *
- * @return array<int, int>
- */
+// Retrieve the raw cart from the session.
 function cart_get(): array
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -321,24 +307,8 @@ function cart_get_details(?PDO $pdo = null): array
     ];
 }
 
-// =============================================================================
-// 2. COUPON VALIDATION & DISCOUNT ENGINE
-// =============================================================================
-
-/**
- * Validate a promotional coupon code and calculate the exact discount.
- *
- * @param string   $couponCode Raw entered code
- * @param float    $subtotal   Current eligible order subtotal
- * @param PDO|null $pdo
- * @return array{
- *   valid: bool,
- *   message: string,
- *   coupon: ?array,
- *   discount_amount: float,
- *   final_total: float
- * }
- */
+// 2. Coupon validation & discount engine.
+// Validates a coupon code and calculates the discount.
 function validate_coupon(string $couponCode, float $subtotal, ?PDO $pdo = null): array
 {
     $code = strtoupper(trim($couponCode));
@@ -459,42 +429,8 @@ function validate_coupon(string $couponCode, float $subtotal, ?PDO $pdo = null):
     ];
 }
 
-// =============================================================================
-// 3. ATOMIC CHECKOUT TRANSACTION ENGINE
-// =============================================================================
-
-/**
- * Execute the complete checkout operation as a single, atomic database transaction.
- *
- * Operations executed within the transaction:
- * 1. Concurrency-safe row locking on dishes, inventory, and coupon.
- * 2. Verification of active status, prices, and portion availability.
- * 3. Generation of unique order number and idempotency constraint validation.
- * 4. Insertion of the primary `orders` row.
- * 5. Insertion of itemized `order_items` snapshots.
- * 6. Concurrency-safe stock deduction via Component B's `reduce_stock()`.
- * 7. Insertion of simulated payment record into `payments`.
- * 8. Insertion of initial order stage progression into `order_status_history`.
- * 9. Atomically incrementing coupon redemption count (if used).
- * 10. Automatic rollback on any constraint violation, insufficient stock, or exception.
- *
- * @param array{
- *   fulfillment_method: string,
- *   delivery_address: ?string,
- *   contact_phone: string,
- *   order_notes: ?string,
- *   payment_method: string,
- *   coupon_code: ?string,
- *   idempotency_token: string
- * } $data
- * @param PDO|null $pdo
- * @return array{
- *   success: bool,
- *   order_id: ?int,
- *   order_number: ?string,
- *   error: ?string
- * }
- */
+// 3. Atomic checkout transaction engine.
+// Executes the complete checkout operation as a single atomic database transaction.
 function process_checkout(array $data, ?PDO $pdo = null): array
 {
     if (!is_logged_in()) {
@@ -809,13 +745,7 @@ function process_checkout(array $data, ?PDO $pdo = null): array
     }
 }
 
-// =============================================================================
-// 4. ORDER STATUS STATE MACHINE & TRANSITION RULES
-// =============================================================================
-
-/**
- * Valid state transition maps according to the assignment requirements.
- */
+// 4. Order status state machine & transition rules.
 const STATUS_TRANSITIONS_DELIVERY = [
     'Placed'           => ['Preparing', 'Cancelled'],
     'Preparing'        => ['Ready', 'Cancelled'],
@@ -1002,19 +932,8 @@ function transition_order_status(
     }
 }
 
-// =============================================================================
-// 5. ORDER QUERY & AUTHORIZATION HELPERS
-// =============================================================================
-
-/**
- * Retrieve complete order details by order_id with strict ownership check.
- * Customers can only access their own orders; staff/admin have authorized access.
- *
- * @param int      $orderId
- * @param int|null $userId If provided, enforces ownership unless role is staff/admin
- * @param PDO|null $pdo
- * @return array|null
- */
+// 5. Order query & authorization helpers.
+// Retrieves complete order details by order_id with ownership check.
 function get_order_by_id(int $orderId, ?int $userId = null, ?PDO $pdo = null): ?array
 {
     if ($orderId <= 0) {
@@ -1248,26 +1167,8 @@ function get_kitchen_orders(?string $statusFilter = null, ?PDO $pdo = null): arr
     return $orders;
 }
 
-// =============================================================================
-// 6. ADMINISTRATOR SALES REPORTING ANALYTICS
-// =============================================================================
-
-/**
- * Retrieve KPI sales summary statistics for the Administrator reporting dashboard.
- *
- * @param string   $startDate 'YYYY-MM-DD'
- * @param string   $endDate   'YYYY-MM-DD'
- * @param PDO|null $pdo
- * @return array{
- *   total_orders: int,
- *   completed_orders: int,
- *   cancelled_orders: int,
- *   active_orders: int,
- *   total_sales_revenue: float,
- *   average_order_value: float,
- *   total_discount_given: float
- * }
- */
+// 6. Administrator sales reporting analytics.
+// Retrieves KPI sales summary statistics for the reporting dashboard.
 function get_sales_kpi_summary(string $startDate, string $endDate, ?PDO $pdo = null): array
 {
     $pdo = $pdo ?? get_db_connection();

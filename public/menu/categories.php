@@ -1,18 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Category Management Interface
- *
- * Requirements:
- * - Protected by RBAC: require_role(['kitchen_staff', 'admin'])
- * - Full Category CRUD: Add, Edit, Toggle Active/Inactive
- * - Prevents duplicate category names (case-insensitive check)
- * - Soft-deletes / deactivates categories rather than physically deleting
- * - Displays active dish counts per category
- * - Strict CSRF protection and audit logging via Component A's log_action()
- */
 
 declare(strict_types=1);
 

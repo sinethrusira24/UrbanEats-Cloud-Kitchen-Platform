@@ -1,11 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Identity, Access and Administration
- *
- * Shared Database Connection (PDO Singleton)
- * Accessible by Components A, B, and C
- */
 
 declare(strict_types=1);
 
@@ -14,24 +7,14 @@ class Database
     private static ?PDO $instance = null;
     private static ?array $config = null;
 
-    /**
-     * Private constructor to prevent direct instantiation (Singleton pattern).
-     */
     private function __construct()
     {
     }
 
-    /**
-     * Prevent cloning of the instance.
-     */
     private function __clone()
     {
     }
 
-    /**
-     * Load application configuration.
-     * Looks for config.local.php first (gitignored), then config.php, then config.sample.php.
-     */
     public static function loadConfig(): array
     {
         if (self::$config !== null) {

@@ -1,17 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Dish Details Page
- *
- * Requirements:
- * - High-definition dish showcase with fallback handling
- * - Category association and detailed culinary descriptions
- * - Portions ready-to-serve stock meter with real-time threshold status
- * - Strict 404 handling for nonexistent or soft-deleted dishes
- * - Parameter sanitization with PDO prepared statements
- */
+// Dish details page.
 
 declare(strict_types=1);
 

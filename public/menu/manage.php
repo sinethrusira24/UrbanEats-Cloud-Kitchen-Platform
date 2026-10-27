@@ -1,17 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Kitchen Staff Dish Management Dashboard
- *
- * Requirements:
- * - Protected by Component A RBAC: require_role(['kitchen_staff', 'admin'])
- * - Comprehensive catalogue table with thumbnails, pricing, inventory balances, and status
- * - Search, category, and active/inactive status filters
- * - Direct triggers to Add/Edit dishes and soft-delete/restore controls
- * - Flash message display and CSRF-protected mutation forms
- */
+// Kitchen staff dish management dashboard.
 
 declare(strict_types=1);
 

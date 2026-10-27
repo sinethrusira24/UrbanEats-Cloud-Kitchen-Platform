@@ -1,56 +1,14 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Inventory Engine & Concurrency-Safe Stock Management
- *
- * Implements atomic, race-condition safe stock operations with transaction participation
- * contract for Component C (Checkout & Orders).
- */
 
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/config/db.php';
 require_once __DIR__ . '/functions.php';
 
-/**
- * Custom Exception thrown when requested stock exceeds available portions.
- */
 class InsufficientStockException extends RuntimeException {}
-
-/**
- * Custom Exception thrown when an invalid dish or inventory record is specified.
- */
 class InvalidDishInventoryException extends InvalidArgumentException {}
 
-/**
- * Concurrency-Safe Stock Reduction Function
- *
- * Mandatory Integration Contract for Component C (Checkout):
- * Deducts dish stock atomically during order placement.
- *
- * Behavior:
- * 1. Validates dish ID and positive quantity.
- * 2. Confirms dish exists and is active (is_active = 1).
- * 3. Uses atomic conditional SQL update: `WHERE dish_id = :id AND qty_available >= :qty`
- * 4. Records stock movement entry with movement_type 'Checkout_Deduction'.
- * 5. Handles transaction ownership safely:
- *    - If Component C already opened a transaction ($pdo->inTransaction() === true),
- *      it participates in the existing transaction without committing or rolling back.
- *    - If called independently, it manages its own transaction.
- *
- * @param int      $dish_id  Primary key of the dish to reduce
- * @param int      $qty      Portions requested (must be positive integer >= 1)
- * @param int|null $user_id  Customer or staff user ID responsible (optional)
- * @param PDO|null $pdo      Active PDO connection (optional; reuses singleton if omitted)
- *
- * @return bool True on successful deduction; throws exception on failure.
- *
- * @throws InvalidDishInventoryException If quantity is <= 0 or dish not found / inactive.
- * @throws InsufficientStockException    If requested quantity exceeds available stock.
- * @throws PDOException                  On database communication failure.
- */
+// Deducts dish stock atomically during order placement.
 function reduce_stock(int $dish_id, int $qty, ?int $user_id = null, ?PDO $pdo = null): bool
 {
     if ($dish_id <= 0) {
@@ -151,18 +109,7 @@ function reduce_stock(int $dish_id, int $qty, ?int $user_id = null, ?PDO $pdo = 
     }
 }
 
-/**
- * Manual Staff Stock Adjustment Function (Restock / Wastage / Correction).
- *
- * @param int         $dish_id       Dish identifier
- * @param int         $change_qty    Signed or unsigned adjustment (+ for restock, - for wastage)
- * @param string      $movement_type One of: 'Restock', 'Wastage', 'Adjustment', 'Initial'
- * @param string      $reason        Mandatory descriptive reason
- * @param int|null    $user_id       Staff member performing adjustment
- * @param PDO|null    $pdo           Database connection
- *
- * @return bool
- */
+// Manual staff stock adjustment (Restock, Wastage, Adjustment).
 function adjust_stock(
     int $dish_id,
     int $change_qty,
@@ -252,12 +199,7 @@ function adjust_stock(
     }
 }
 
-/**
- * Calculate KPI summary statistics for the Kitchen Staff Inventory Dashboard.
- *
- * @param PDO|null $pdo
- * @return array{total_dishes: int, in_stock: int, low_stock: int, out_of_stock: int}
- */
+// Calculates KPI summary statistics for the inventory dashboard.
 function get_stock_summary(?PDO $pdo = null): array
 {
     $pdo = $pdo ?? get_db_connection();
@@ -281,25 +223,13 @@ function get_stock_summary(?PDO $pdo = null): array
     ];
 }
 
-/**
- * Format a numeric price to Sri Lankan Rupees string (e.g., "LKR 1,650.00").
- *
- * @param float|int|string $price
- * @return string
- */
+// Formats a numeric price to Sri Lankan Rupees string.
 function format_lkr(float|int|string $price): string
 {
     return 'LKR ' . number_format((float)$price, 2);
 }
 
-/**
- * Render an accessible HTML status badge based on current stock and reorder threshold.
- *
- * @param int  $qty_available Current available quantity
- * @param int  $reorder_level Low-stock warning threshold
- * @param bool $showQuantity  Whether to display the count inside the badge
- * @return string HTML span
- */
+// Renders an accessible HTML status badge based on stock level.
 function render_stock_badge(int $qty_available, int $reorder_level = 5, bool $showQuantity = false): string
 {
     if ($qty_available <= 0) {

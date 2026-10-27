@@ -1,11 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Identity, Access and Administration
- *
- * Core Helper Functions and Shared Audit Logging System
- * Exposed to Components A, B, and C
- */
 
 declare(strict_types=1);
 
@@ -121,18 +114,7 @@ function redirect(string $url): void
     exit;
 }
 
-/**
- * Shared System Audit Logger
- *
- * Records security, administrative, and domain events across Components A, B, and C.
- * Defined signature strictly satisfies the team integration agreement:
- * log_action(string $action, ?string $details = null)
- *
- * @param string      $action   Action identifier (e.g., 'user_login', 'dish_created', 'order_placed')
- * @param string|null $details  Descriptive information or JSON payload
- * @param int|null    $user_id  Optional user ID (defaults to active session user if available)
- * @param PDO|null    $pdo      Optional active PDO connection (for running inside existing transaction)
- */
+// Records security, administrative, and domain events into the audit log.
 function log_action(string $action, ?string $details = null, ?int $user_id = null, ?PDO $pdo = null): void
 {
     try {
@@ -174,17 +156,7 @@ function log_action(string $action, ?string $details = null, ?int $user_id = nul
     }
 }
 
-/**
- * Validate password against the platform security policy:
- * - At least 8 characters
- * - At least 1 uppercase letter
- * - At least 1 lowercase letter
- * - At least 1 number
- * - At least 1 special character
- *
- * @param string $password
- * @return array<int, string> List of failure reasons, or empty array if valid
- */
+// Validates password against length and character requirements.
 function validate_password_strength(string $password): array
 {
     $errors = [];
@@ -208,16 +180,7 @@ function validate_password_strength(string $password): array
     return $errors;
 }
 
-/**
- * Pagination calculation helper.
- *
- * @param int    $totalRecords
- * @param int    $perPage
- * @param int    $currentPage
- * @param string $baseUrl
- * @param array  $queryParams
- * @return array
- */
+// Pagination calculation helper.
 function paginate(int $totalRecords, int $perPage, int $currentPage, string $baseUrl, array $queryParams = []): array
 {
     $perPage = max(1, $perPage);

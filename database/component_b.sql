@@ -1,11 +1,3 @@
--- ============================================================
---  UrbanEats Cloud Kitchen Platform – Component B Export
---  Component : Component B (Menu, Catalogue and Inventory)
---  Database  : urbaneats_db (MySQL / MariaDB via phpMyAdmin)
---  Engine    : InnoDB
---  Charset   : utf8mb4 / utf8mb4_unicode_ci
--- ============================================================
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO';
@@ -85,11 +77,7 @@ CREATE TABLE IF NOT EXISTS `stock_movements` (
     INDEX `idx_stock_movements_user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Audit log of every stock change and adjustment';
 
--- ============================================================
---  COMPONENT B SEED DATA (20+ Rows per Table)
--- ============================================================
 
--- ── Seed Categories (21 Rows) ───────────────────────────────
 INSERT INTO `categories` (`category_id`, `name`, `description`, `display_order`, `is_active`) VALUES
 (1,  'Rice & Curry',              'Authentic Sri Lankan rice plates with aromatic curries and condiments',  1, 1),
 (2,  'Kottu Specialties',        'Freshly chopped godamba roti tossed with spicy meats, eggs and gravy',    2, 1),

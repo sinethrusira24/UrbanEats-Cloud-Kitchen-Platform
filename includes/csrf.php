@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Identity, Access and Administration
- *
- * Cross-Site Request Forgery (CSRF) Protection
- * Generates and validates cryptographically secure tokens on all state-changing requests.
- */
+
 
 declare(strict_types=1);
 

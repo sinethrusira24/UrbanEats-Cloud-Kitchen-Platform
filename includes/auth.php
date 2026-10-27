@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Identity, Access and Administration
- *
- * Reusable Authentication and Authorization Guards
- * Exposed to Components A, B, and C
- */
+// Authentication and authorization guards.
 
 declare(strict_types=1);
 
@@ -97,11 +91,7 @@ function has_role(string|array $allowedRoles): bool
     return in_array($currentRole, $allowedRoles, true);
 }
 
-/**
- * Authentication Guard
- * Enforces that a valid authenticated session exists.
- * If unauthenticated, records intended target URL and redirects to login page.
- */
+// Enforces that a valid authenticated session exists.
 function require_login(): void
 {
     if (!is_logged_in()) {
@@ -114,17 +104,7 @@ function require_login(): void
     }
 }
 
-/**
- * Role-Based Access Control (RBAC) Guard
- * Enforces authentication and validates that user role matches required role permissions.
- * Serves an HTTP 403 Access Denied response if unauthorized.
- *
- * Usage Examples:
- *   require_role('admin');
- *   require_role(['kitchen_staff', 'admin']);
- *
- * @param string|array<int, string> $allowedRoles
- */
+// Enforces authentication and checks user role permissions.
 function require_role(string|array $allowedRoles): void
 {
     require_login();
@@ -147,16 +127,7 @@ function require_role(string|array $allowedRoles): void
     }
 }
 
-/**
- * Check if an identifier (username/email) or client IP is currently throttled due to failed login attempts.
- * Threshold: 5 consecutive failed attempts within lockout window (15 minutes).
- *
- * @param string $identifier
- * @param PDO    $pdo
- * @param int    $maxAttempts
- * @param int    $lockoutSeconds
- * @return array{throttled: bool, remaining_seconds: int, failed_attempts: int}
- */
+// Checks if an identifier or IP is throttled due to failed login attempts.
 function check_login_throttling(
     string $identifier,
     PDO $pdo,
@@ -220,13 +191,7 @@ function check_login_throttling(
     ];
 }
 
-/**
- * Record a login attempt into login_attempts table.
- *
- * @param string $identifier Username or email attempted
- * @param bool   $isSuccess  True for successful login, false for failure
- * @param PDO    $pdo
- */
+// Records a login attempt into the login_attempts table.
 function record_login_attempt(string $identifier, bool $isSuccess, PDO $pdo): void
 {
     $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';

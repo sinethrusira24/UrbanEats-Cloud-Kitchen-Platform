@@ -1,14 +1,3 @@
--- ============================================================================
--- UrbanEats Cloud Kitchen Platform
--- Component C: Ordering, Payment and Tracking
--- Database Schema and Seed Data
--- ============================================================================
--- Technology: MySQL 8.x / MariaDB 10.4+
--- Character Set: utf8mb4 / utf8mb4_unicode_ci
--- Complies with 3NF (Third Normal Form), Foreign Key Constraints, and Indexes.
--- Depends on: Component A (users, roles) and Component B (dishes, inventory).
--- ============================================================================
-
 USE `urbaneats_db`;
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -22,10 +11,6 @@ DROP TABLE IF EXISTS `coupons`;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
--- ----------------------------------------------------------------------------
--- Table 1: coupons
--- Promotional discounts applied at checkout with validity & usage limits
--- ----------------------------------------------------------------------------
 CREATE TABLE `coupons` (
   `coupon_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `coupon_code` VARCHAR(30) NOT NULL,
@@ -44,10 +29,6 @@ CREATE TABLE `coupons` (
   KEY `idx_coupons_active_dates` (`is_active`, `valid_from`, `expiry_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Promotional coupon codes and discount policies';
 
--- ----------------------------------------------------------------------------
--- Table 2: orders
--- Primary order record capturing customer, fulfillment, totals and status
--- ----------------------------------------------------------------------------
 CREATE TABLE `orders` (
   `order_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_number` VARCHAR(32) NOT NULL,
@@ -81,10 +62,6 @@ CREATE TABLE `orders` (
     ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Customer orders store';
 
--- ----------------------------------------------------------------------------
--- Table 3: order_items
--- Itemized line items preserving historical purchase prices and quantities
--- ----------------------------------------------------------------------------
 CREATE TABLE `order_items` (
   `order_item_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_id` BIGINT UNSIGNED NOT NULL,
@@ -107,10 +84,6 @@ CREATE TABLE `order_items` (
     ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Line items for customer orders';
 
--- ----------------------------------------------------------------------------
--- Table 4: payments
--- Simulated payment records capturing chosen method and transaction state
--- ----------------------------------------------------------------------------
 CREATE TABLE `payments` (
   `payment_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `order_id` BIGINT UNSIGNED NOT NULL,
@@ -156,13 +129,7 @@ CREATE TABLE `order_status_history` (
     ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Order lifecycle audit history';
 
--- ============================================================================
--- SEED DATA (20+ realistic rows per main table)
--- ============================================================================
 
--- ----------------------------------------------------------------------------
--- 1. Seed Coupons (21 realistic promotional coupons)
--- ----------------------------------------------------------------------------
 INSERT INTO `coupons` (`coupon_id`, `coupon_code`, `discount_type`, `discount_value`, `minimum_order_value`, `valid_from`, `expiry_date`, `usage_limit`, `usage_count`, `is_active`) VALUES
 (1,  'WELCOME10',    'percentage', 10.00,  1500.00, '2026-09-01 00:00:00', '2026-12-31 23:59:59', 500,  12, 1),
 (2,  'URBANEATS20',  'percentage', 20.00,  3000.00, '2026-10-01 00:00:00', '2026-11-30 23:59:59', 200,   8, 1),

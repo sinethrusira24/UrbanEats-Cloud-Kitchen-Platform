@@ -1,18 +1,7 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Identity, Access and Administration
- *
- * Sample Configuration File
- *
- * Copy this file to `config/config.local.php` and adjust your environment credentials.
- * The `config.local.php` file is git-ignored to prevent credential leaks.
- */
 
 return [
-    // -------------------------------------------------------------------------
-    // Database Credentials
-    // -------------------------------------------------------------------------
+
     'db' => [
         'host'    => getenv('URBANEATS_DB_HOST') ?: 'localhost',
         'name'    => getenv('URBANEATS_DB_NAME') ?: 'urbaneats_db',
@@ -22,9 +11,6 @@ return [
         'port'    => getenv('URBANEATS_DB_PORT') ?: 3306,
     ],
 
-    // -------------------------------------------------------------------------
-    // Application Settings
-    // -------------------------------------------------------------------------
     'app' => [
         'name'        => 'UrbanEats Cloud Kitchen',
         'tagline'     => 'Premium Cloud Kitchen Platform',
@@ -33,11 +19,7 @@ return [
         'timezone'    => 'Asia/Colombo',
     ],
 
-    // -------------------------------------------------------------------------
-    // Authentication & Security Policy
-    // -------------------------------------------------------------------------
     'security' => [
-        // Inactivity timeout in seconds (1800s = 30 minutes)
         'session_lifetime'      => 1800,
         // Max consecutive failed logins before temporary lockout
         'login_max_attempts'    => 5,

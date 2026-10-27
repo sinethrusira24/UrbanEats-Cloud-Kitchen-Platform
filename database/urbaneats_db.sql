@@ -1,14 +1,4 @@
-﻿-- ============================================================================
--- UrbanEats Cloud Kitchen Platform
--- Component A: Identity, Access and Administration
--- Database Schema and Seed Data
--- ============================================================================
--- Technology: MySQL 8.x / MariaDB 10.4+
--- Character Set: utf8mb4 / utf8mb4_unicode_ci
--- Complies with 3NF (Third Normal Form), Foreign Key Constraints, and Indexes.
--- ============================================================================
-
-CREATE DATABASE IF NOT EXISTS `urbaneats_db`
+﻿CREATE DATABASE IF NOT EXISTS `urbaneats_db`
   DEFAULT CHARACTER SET utf8mb4
   DEFAULT COLLATE utf8mb4_unicode_ci;
 

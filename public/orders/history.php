@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component C: Customer Order History
- *
- * Displays authenticated customer's past and active orders with lifecycle stage filters,
- * pagination, and direct access to order tracking and printable receipts.
- */
+// Customer order history.
 
 declare(strict_types=1);
 

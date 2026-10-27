@@ -1,8 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Administrator Dashboard
- */
+// Administrator dashboard.
 
 declare(strict_types=1);
 

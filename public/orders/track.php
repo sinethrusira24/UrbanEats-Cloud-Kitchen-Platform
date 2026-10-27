@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component C: Real-Time Order Tracking & Timeline
- *
- * Visualizes order lifecycle progression (Placed -> Preparing -> Ready -> Out for Delivery / Collected -> Completed),
- * completed stage timestamps, and handles customer self-cancellation for eligible placed orders.
- */
+// Real-time order tracking and lifecycle timeline.
 
 declare(strict_types=1);
 

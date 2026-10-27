@@ -1,13 +1,3 @@
--- ============================================================================
--- UrbanEats Cloud Kitchen Platform
--- Component A: Identity, Access and Administration
--- Database Schema and Seed Data
--- ============================================================================
--- Technology: MySQL 8.x / MariaDB 10.4+
--- Character Set: utf8mb4 / utf8mb4_unicode_ci
--- Complies with 3NF (Third Normal Form), Foreign Key Constraints, and Indexes.
--- ============================================================================
-
 CREATE DATABASE IF NOT EXISTS `urbaneats_db`
   DEFAULT CHARACTER SET utf8mb4
   DEFAULT COLLATE utf8mb4_unicode_ci;
@@ -26,10 +16,6 @@ DROP TABLE IF EXISTS `roles`;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
--- ----------------------------------------------------------------------------
--- Table 1: roles
--- Defines the RBAC authorization levels for UrbanEats
--- ----------------------------------------------------------------------------
 CREATE TABLE `roles` (
   `role_id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `role_name` VARCHAR(30) NOT NULL,
@@ -39,10 +25,6 @@ CREATE TABLE `roles` (
   UNIQUE KEY `uk_roles_name` (`role_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='User authorization roles';
 
--- ----------------------------------------------------------------------------
--- Table 2: users
--- Central user account store for all platform actors
--- ----------------------------------------------------------------------------
 CREATE TABLE `users` (
   `user_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `role_id` TINYINT UNSIGNED NOT NULL,
@@ -65,10 +47,6 @@ CREATE TABLE `users` (
     ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Authenticated platform user accounts';
 
--- ----------------------------------------------------------------------------
--- Table 3: login_attempts
--- Captures authentication events for brute-force defense and 5-attempt lockout
--- ----------------------------------------------------------------------------
 CREATE TABLE `login_attempts` (
   `attempt_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `identifier` VARCHAR(120) NOT NULL COMMENT 'Attempted username or email',
@@ -81,10 +59,6 @@ CREATE TABLE `login_attempts` (
   KEY `idx_login_attempts_success` (`is_success`, `attempted_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Authentication logs for rate limiting and lockouts';
 
--- ----------------------------------------------------------------------------
--- Table 4: audit_log
--- System-wide immutable record of security and administrative actions
--- ----------------------------------------------------------------------------
 CREATE TABLE `audit_log` (
   `audit_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` BIGINT UNSIGNED NULL DEFAULT NULL COMMENT 'Actor user ID or NULL for system/unauthenticated events',
@@ -103,10 +77,6 @@ CREATE TABLE `audit_log` (
     ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Security audit trail';
 
--- ----------------------------------------------------------------------------
--- Table 5: password_resets
--- Time-limited cryptographically secure password reset tokens
--- ----------------------------------------------------------------------------
 CREATE TABLE `password_resets` (
   `reset_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` BIGINT UNSIGNED NOT NULL,
@@ -124,12 +94,6 @@ CREATE TABLE `password_resets` (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Secure password reset requests';
 
--- ============================================================================
--- SEED DATA
--- Default password for all seed accounts is: Password1!
--- Hashed via password_hash('Password1!', PASSWORD_BCRYPT, ['cost' => 12])
--- Hash: $2y$12$HpBI4CgUcVHAPlztAa/7O.hKMcCUhgO.QUvHHJAcsvsqQqhCcSG6O
--- ============================================================================
 
 -- Roles (Fixed domain enumeration)
 INSERT INTO `roles` (`role_id`, `role_name`, `role_description`) VALUES

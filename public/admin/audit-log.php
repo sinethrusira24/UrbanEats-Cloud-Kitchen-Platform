@@ -1,8 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Administrator Audit Log Viewer
- */
 
 declare(strict_types=1);
 

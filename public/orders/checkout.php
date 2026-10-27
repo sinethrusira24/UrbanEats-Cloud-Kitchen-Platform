@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component C: Checkout Page
- *
- * Enforces customer authentication, fulfillment selection, simulated payment choice,
- * promotional coupon application, and executes the single atomic checkout database transaction.
- */
+// Checkout and order submission page.
 
 declare(strict_types=1);
 

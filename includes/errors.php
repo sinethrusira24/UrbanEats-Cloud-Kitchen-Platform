@@ -1,12 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Identity, Access and Administration
- *
- * Centralized Error & Exception Handling
- * Ensures no raw PHP or SQL errors are leaked to users, while logging complete
- * diagnostics to logs/error.log.
- */
 
 declare(strict_types=1);
 

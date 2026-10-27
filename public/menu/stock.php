@@ -1,18 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Real-Time Inventory & Stock Dashboard
- *
- * Requirements:
- * - Protected by RBAC: require_role(['kitchen_staff', 'admin'])
- * - Dynamic KPI summary cards (Total, In Stock, Low Stock, Out of Stock)
- * - Visual inventory progress meters with color-coded alerts
- * - Restock & Wastage adjustment modals with mandatory reason logging
- * - Concurrency protection preventing negative inventory
- * - Live audit trail of recent stock movements joined with Component A users
- */
+// Real-time inventory & stock dashboard.
 
 declare(strict_types=1);
 

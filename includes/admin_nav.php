@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Administrator Navigation Bar
- *
- * Dedicated sub-navigation bar providing seamless 1-click access
- * across all administrative modules and kitchen operations.
- */
+// Administrator navigation bar.
 
 declare(strict_types=1);
 

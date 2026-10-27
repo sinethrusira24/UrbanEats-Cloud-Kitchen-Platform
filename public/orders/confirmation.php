@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component C: Order Confirmation & Printable Invoice
- *
- * Displays post-checkout confirmation, order receipt, and serves as an official
- * printable tax invoice formatted with print-specific CSS.
- */
+// Order confirmation and printable receipt.
 
 declare(strict_types=1);
 

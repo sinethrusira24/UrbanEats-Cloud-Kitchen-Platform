@@ -1,24 +1,10 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Component B Integration Gateway & Module Helper
- *
- * This file provides the standardized external API for Component C (Orders & Checkout)
- * and shared layouts to interact with Component B services.
- */
 
 declare(strict_types=1);
 
 require_once __DIR__ . '/stock.php';
 
-/**
- * Fetch all active categories with their active dish counts.
- *
- * @param PDO|null $pdo
- * @return array<int, array{category_id: int, name: string, description: string, dish_count: int}>
- */
+// Fetches all active categories with dish counts.
 function get_active_categories(?PDO $pdo = null): array
 {
     $pdo = $pdo ?? get_db_connection();
@@ -36,13 +22,7 @@ function get_active_categories(?PDO $pdo = null): array
     return $stmt->fetchAll();
 }
 
-/**
- * Fetch complete dish record including category and current inventory status.
- *
- * @param int      $dish_id
- * @param PDO|null $pdo
- * @return array|null
- */
+// Fetches complete dish record with category and inventory.
 function get_dish_details(int $dish_id, ?PDO $pdo = null): ?array
 {
     if ($dish_id <= 0) {
@@ -69,15 +49,7 @@ function get_dish_details(int $dish_id, ?PDO $pdo = null): ?array
     return $dish ?: null;
 }
 
-/**
- * Check whether a dish has enough available portions ready to serve.
- * Exposed to Component C before adding items to customer cart.
- *
- * @param int      $dish_id
- * @param int      $requested_qty
- * @param PDO|null $pdo
- * @return bool True if dish is active and has sufficient portions
- */
+// Checks whether a dish has enough available portions ready to serve.
 function check_dish_availability(int $dish_id, int $requested_qty = 1, ?PDO $pdo = null): bool
 {
     if ($dish_id <= 0 || $requested_qty <= 0) {

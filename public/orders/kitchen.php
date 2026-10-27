@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component C: Kitchen Order Management Queue
- *
- * Dedicated operational workflow console for Kitchen Staff and Administrators to view
- * incoming tickets, track fulfillment types, and progress orders through allowed lifecycle stages.
- */
+// Kitchen order management queue.
 
 declare(strict_types=1);
 

@@ -1,8 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Shared Page Footer
- */
 
 declare(strict_types=1);
 ?>

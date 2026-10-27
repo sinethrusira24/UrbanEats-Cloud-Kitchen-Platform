@@ -1,17 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Soft Delete & Restore Mutation Handler
- *
- * Requirements:
- * - POST-only access with strict CSRF verification
- * - Role-Based Access Control: require_role(['kitchen_staff', 'admin'])
- * - Never physically deletes rows; sets `is_active = 0` (soft delete) or `is_active = 1` (restore)
- * - Preserves historical inventory references and past order lines in Component C
- * - Audit logging via Component A's log_action()
- */
+// Soft delete & restore mutation handler.
 
 declare(strict_types=1);
 

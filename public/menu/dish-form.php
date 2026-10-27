@@ -1,23 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component B: Menu, Catalogue and Inventory
- *
- * Add & Edit Dish Form with Multi-Tier Secure Image Upload
- *
- * Requirements:
- * - Dual Mode: CREATE and UPDATE
- * - Multi-tier Image Validation:
- *   - MIME type inspection via PHP Fileinfo (image/jpeg, image/png, image/webp)
- *   - File extension whitelist check (.jpg, .jpeg, .png, .webp)
- *   - Image content verification via getimagesize()
- *   - Strict size limit enforcement (max 3 MB)
- *   - Cryptographically random filename generation (bin2hex(random_bytes(16)))
- *   - Secure storage in non-executable uploads/dishes/ directory
- * - Minimal vanilla JavaScript live preview
- * - Transactional creation linking dish, inventory, and initial stock movements
- * - CSRF verification and audit logging via Component A's log_action()
- */
+// Add & edit dish form with secure image upload.
 
 declare(strict_types=1);
 

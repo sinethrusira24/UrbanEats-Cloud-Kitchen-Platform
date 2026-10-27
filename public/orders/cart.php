@@ -1,11 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component C: Shopping Cart Management
- *
- * Provides customer shopping cart view, quantity adjustments, item removals,
- * availability re-validation against database, and checkout gateway.
- */
+// Customer shopping cart page.
 
 declare(strict_types=1);
 

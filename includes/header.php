@@ -1,8 +1,5 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Shared Page Header and Role-Aware Navigation
- */
+// Shared page header and role-aware navigation.
 
 declare(strict_types=1);
 

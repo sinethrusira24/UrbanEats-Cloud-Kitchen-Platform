@@ -1,11 +1,4 @@
 <?php
-/**
- * UrbanEats Cloud Kitchen Platform
- * Component A: Identity, Access and Administration
- *
- * Central Application Bootstrap
- * Initializes security, error handling, session hardening, and core includes.
- */
 
 declare(strict_types=1);
 
