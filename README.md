@@ -1,6 +1,5 @@
 # UrbanEats Cloud Kitchen Platform
 
-> IT3113 Advanced Web Technologies – Group Assignment  
 > A database-driven cloud kitchen web application built with HTML5, CSS3, PHP 8.x and MySQL.
 
 ---
